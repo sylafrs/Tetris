@@ -1,4 +1,4 @@
-#include "Input.h"
+#include "../include/Input.h"
 #include <SDL/SDL.h>
 
 
@@ -41,7 +41,7 @@ void Input::update() {
                 }
             break;
             case SDL_QUIT:
-                quit = 1;
+                this->quit = 1;
             break;
             default:
             break;

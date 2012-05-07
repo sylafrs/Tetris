@@ -1,4 +1,4 @@
-#include "Exception.h"
+#include "../include/Exception.h"
 #include <string>
 
 using namespace std;
@@ -11,11 +11,11 @@ Exception::~Exception() {
 
 }
 
-const std::string & Exception::getMessage() {
+const string & Exception::getMessage() const {
     return this->message;
 }
 
 ostream & operator<<(ostream & out, const Exception & e) {
-    out << e << endl;
+    out << e;
     return out;
 }

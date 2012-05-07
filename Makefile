@@ -1,20 +1,20 @@
-tetris: Input.o Video.o main.o SDL_Object.o
-	g++ Input.o Video.o main.o -o tetris -lSDL
+bin/tetris: obj/Input.o obj/Video.o obj/main.o obj/SDL_Object.o obj/Exception.o
+	g++ obj/Input.o obj/Video.o obj/main.o obj/Exception.o obj/SDL_Object.o -o bin/tetris -lSDL
 
-Exception.o: Exception.h
-	g++ -c Exception.cpp -o Exception.o
+obj/Exception.o: src/Exception.cpp include/Exception.h
+	g++ -c src/Exception.cpp -o obj/Exception.o
 
-SDL_Object.o: SDL_Object.h
-	g++ -c SDL_Object.cpp -o SDL_Object.o
+obj/SDL_Object.o: src/SDL_Object.cpp include/SDL_Object.h
+	g++ -c src/SDL_Object.cpp -o obj/SDL_Object.o
 
-Input.o: Input.h
-	g++ -c Input.cpp -o Input.o
+obj/Input.o: src/Input.cpp include/Input.h
+	g++ -c src/Input.cpp -o obj/Input.o
 
-Video.o: Video.h
-	g++ -c Video.cpp -o Video.o
+obj/Video.o: src/Video.cpp include/Video.h
+	g++ -c src/Video.cpp -o obj/Video.o
 
-main.o: header.h
-	g++ -c main.cpp -o main.o
+obj/main.o: src/main.cpp
+	g++ -c src/main.cpp -o obj/main.o
 
 clean:
-	rm -rf *.o
+	rm -rf obj/*.o
