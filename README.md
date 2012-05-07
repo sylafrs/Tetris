@@ -1,4 +1,2 @@
-Tetris
-======
-
-a Simple Tetris
+## Tetris
+A simple tetris
