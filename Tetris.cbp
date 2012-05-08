@@ -53,6 +53,7 @@
 		<Unit filename="src\Input.cpp" />
 		<Unit filename="src\SDL_Object.cpp" />
 		<Unit filename="src\Shape.cpp" />
+		<Unit filename=".\src\Structure.cpp" />
 		<Unit filename="src\Surface.cpp" />
 		<Unit filename="src\Video.cpp" />
 		<Unit filename="src\main.cpp" />

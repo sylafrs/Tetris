@@ -87,3 +87,102 @@
 	"../include/Chrono.h"
 	<SDL/SDL.h>
 
+1336503003 source:e:\wamp\www\tetris\src\exception.cpp
+	"../include/Exception.h"
+	<string>
+
+1336503003 e:\wamp\www\tetris\include\exception.h
+	<string>
+
+1336503585 source:e:\wamp\www\tetris\src\input.cpp
+	"../include/Input.h"
+	<SDL/SDL.h>
+
+1336503867 e:\wamp\www\tetris\include\input.h
+	<SDL/SDL.h>
+
+1336503003 source:e:\wamp\www\tetris\src\sdl_object.cpp
+	"../include/SDL_Object.h"
+	"../include/Video.h"
+	"../include/Input.h"
+	"../include/Exception.h"
+	"../include/Chrono.h"
+	<SDL/SDL.h>
+	<string>
+
+1336503003 e:\wamp\www\tetris\include\sdl_object.h
+	"Video.h"
+	"Input.h"
+	"Exception.h"
+	"Chrono.h"
+	<string>
+
+1336503003 e:\wamp\www\tetris\include\video.h
+	<SDL/SDL.h>
+	<string>
+	"Exception.h"
+	"Surface.h"
+
+1336503003 e:\wamp\www\tetris\include\surface.h
+	"Video.h"
+	<SDL/SDL.h>
+	"Exception.h"
+
+1336503003 e:\wamp\www\tetris\include\chrono.h
+	<SDL/SDL.h>
+
+1336506966 source:e:\wamp\www\tetris\src\shape.cpp
+	"../include/constantes.h"
+	"../include/Surface.h"
+	"../include/Shape.h"
+
+1336503003 e:\wamp\www\tetris\include\constantes.h
+	"shapes.h"
+
+1336503003 e:\wamp\www\tetris\include\shapes.h
+	"constantes.h"
+
+1336506757 e:\wamp\www\tetris\include\shape.h
+	"constantes.h"
+	"Surface.h"
+
+1336503003 source:e:\wamp\www\tetris\src\surface.cpp
+	"../include/Surface.h"
+	"../include/Video.h"
+	"../include/Exception.h"
+	<SDL/SDL.h>
+	<string>
+	<iostream>
+
+1336503003 source:e:\wamp\www\tetris\src\video.cpp
+	"../include/Video.h"
+	"../include/Exception.h"
+	<string>
+	<SDL/SDL.h>
+	<iostream>
+
+1336510742 source:e:\wamp\www\tetris\src\main.cpp
+	"../include/SDL_Object.h"
+	"../include/constantes.h"
+	"../include/shapes.h"
+	"../include/Surface.h"
+	"../include/Video.h"
+	"../include/Shape.h"
+	"../include/Structure.h"
+	<iostream>
+	<ctime>
+
+1336503003 source:e:\wamp\www\tetris\src\chrono.cpp
+	"../include/Chrono.h"
+	<SDL/SDL.h>
+
+1336511053 source:e:\wamp\www\tetris\src\structure.cpp
+	"../include/Structure.h"
+	"../include/Shape.h"
+
+1336511155 e:\wamp\www\tetris\include\structure.h
+	"Shape.h"
+	"Surface.h"
+	<list>
+	<vector>
+

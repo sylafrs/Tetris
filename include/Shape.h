@@ -1,24 +1,24 @@
 #include "constantes.h"
 
 #ifndef SHAPE_H_
-#define SHAPE_H_    
+#define SHAPE_H_
 
     #include "Surface.h"
 
     class Shape {
         private:
             const Surface & surface;
-            const shape & shapeArray;            
-            
+            const shape & shapeArray;
+
             const unsigned int size;
             const unsigned int cForms;
             const unsigned int initX;
             const unsigned int initY;
 
         public:
-            Shape(  const Surface & surface,  
+            Shape(  const Surface & surface,
                     const shape & shapeArray,
-                    unsigned int size, unsigned int cForms, 
+                    unsigned int size, unsigned int cForms,
                     unsigned int initX, unsigned int initY);
 
             virtual ~Shape();
@@ -29,7 +29,8 @@
             unsigned int getCForms() const;
             unsigned int getInitX() const;
             unsigned int getInitY() const;
-                     
+
+            bool checkX(int & x, int max, unsigned int num) const;
     };
 
     bool blitInit(Surface & surface, const Shape & shape,

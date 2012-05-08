@@ -6,7 +6,7 @@ Shape::Shape(const Surface & surface,
              const shape & shapeArray,
              unsigned int size, unsigned int cForms,
              unsigned int initX, unsigned int initY) :
-surface(surface), shapeArray(shapeArray), 
+surface(surface), shapeArray(shapeArray),
 size(size), cForms(cForms),
 initX(initX), initY(initY)
 {
@@ -41,17 +41,41 @@ bool Shape::check(unsigned int x, unsigned int y, unsigned int num) const {
     return this->shapeArray[num][y][x];
 }
 
-bool blitInit(Surface & surface, const Shape & shape, 
+bool Shape::checkX(int & x, int max, unsigned int num) const {
+    int i, j;
+    int first, last; // column
+
+    for(i = 0; i < this->size; i++) {
+        for(j = 0; j < this->size; j++) {
+            if(this->shapeArray[num][j][i]) {
+                if(i < first)   first = i;
+                if(i > last)    last = i;
+            }
+        }
+    }
+
+    if(x < -first) {
+        x = -first;
+    }
+
+    if(x + last >= max) {
+        x = max-last-1;
+    }
+
+    return true;
+}
+
+bool blitInit(Surface & surface, const Shape & shape,
               unsigned int x, unsigned int y) {
 
     return true;
 }
 
 
-bool blit(Surface & surface, const Shape & shape, 
+bool blit(Surface & surface, const Shape & shape,
           unsigned int x, unsigned int y, unsigned int num) {
 
-    unsigned int s = shape.getSize();    
+    unsigned int s = shape.getSize();
     const Surface & surfShape = shape.getSurface();
 
     unsigned int i, j;

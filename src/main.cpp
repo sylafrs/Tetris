@@ -4,11 +4,14 @@
 #include "../include/Surface.h"
 #include "../include/Video.h"
 #include "../include/Shape.h"
+#include "../include/Structure.h"
+
 #include <iostream>
 #include <ctime>
 
 int getRand(int min, int max) {
-    return (int)((double)rand()/RAND_MAX*(max-min))+min;
+    //return (int)(rand()/(double)RAND_MAX*(max-min))+min;
+    return rand()%(max-min+1)+min;
 }
 
 using namespace std;
@@ -39,13 +42,14 @@ int main(int argc, char * argv[]) {
             Shape(rouge, longLShape, sLongL, cLongL, xInitLongL, yInitLongL)
         };
 
+        Structure structure;
 
         Shape * unit = &array[getRand(0, arraySize-1)];
-        unsigned int x = initX, y = initY;
+        int x = initX, y = initY;
         int form = 0;
         int cForms = unit->getCForms();
 
-        bool keyup = (!in.key[SDLK_LEFT] && !in.key[SDLK_RIGHT]);
+        bool keyup = (!in.key[SDLK_LEFT] && !in.key[SDLK_RIGHT] && !in.key[SDLK_a] && !in.key[SDLK_d]);
         Chrono fall, key;
 
         video.fill(255, 255, 255);
@@ -53,37 +57,46 @@ int main(int argc, char * argv[]) {
         sdl.update(30);
         while(!in.quit && !in.key[SDLK_ESCAPE]) {
 
-            if(fall.check(1000) || (in.key[SDLK_DOWN] && fall.check(50))) {
+            if(fall.check(1000) || ((in.key[SDLK_DOWN] || in.key[SDLK_s]) && fall.check(50))) {
                 fall.reset();
                 y++;
             }
 
             if(keyup || key.check(300)) {
                 key.reset();
-                if(in.key[SDLK_LEFT]) {
+                if(in.key[SDLK_LEFT] || in.key[SDLK_a]) {
                     x--;
                 }
-                if(in.key[SDLK_RIGHT]) {
+                if(in.key[SDLK_RIGHT] || in.key[SDLK_d]) {
                     x++;
                 }
             }
 
-            keyup = (!in.key[SDLK_LEFT] && !in.key[SDLK_RIGHT]);
+            keyup = (!in.key[SDLK_LEFT] && !in.key[SDLK_RIGHT] && !in.key[SDLK_a] && !in.key[SDLK_d]);
 
-            if(in.key[SDLK_UP]) {
-                in.key[SDLK_UP] = false;
+            if(in.key[SDLK_UP] || in.key[SDLK_w]) {
+                in.key[SDLK_UP] = in.key[SDLK_w] = false;
                 form++;
-                if(form >= cForms) {
-                    form = 0;
-                }
             }
 
             if(in.key[SDLK_SPACE]) {
                 in.key[SDLK_SPACE] = false;
+            }
 
+            if(form >= cForms) {
+                form = 0;
+            }
+
+            unit->checkX(x, wGrid, form);
+            if(structure.add(*unit, x, y)) {
+                unit = &array[getRand(0, arraySize-1)];
+                x = initX, y = initY;
+                form = 0;
+                cForms = unit->getCForms();
             }
 
             video.fill(255, 255, 255);
+            video.fill(0,0,0,0,0,wGrid*squareSize,hGrid*squareSize);
             blit(video, *unit, x, y, form);
             sdl.update(30);
         }

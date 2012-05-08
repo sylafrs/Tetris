@@ -1,7 +1,6 @@
 #include "../include/Input.h"
 #include <SDL/SDL.h>
 
-
 Input::Input() {
     memset(this, 0, sizeof(*this));
 }
@@ -34,7 +33,7 @@ void Input::update() {
                 this->mousebuttons[event.button.button] = true;
             break;
             case SDL_MOUSEBUTTONUP:
-                if( event.button.button!=SDL_BUTTON_WHEELUP && 
+                if( event.button.button!=SDL_BUTTON_WHEELUP &&
                     event.button.button!=SDL_BUTTON_WHEELDOWN )
                 {
                     this->mousebuttons[event.button.button] = false;
