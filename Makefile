@@ -1,20 +1,29 @@
-bin/tetris: obj/Input.o obj/Video.o obj/main.o obj/SDL_Object.o obj/Exception.o
-	g++ obj/Input.o obj/Video.o obj/main.o obj/Exception.o obj/SDL_Object.o -o bin/tetris -lSDL
+CC=g++
+CFLAGS=-W -Wall -ansi -pedantic
+LDFLAGS=-lSDL
 
-obj/Exception.o: src/Exception.cpp include/Exception.h
-	g++ -c src/Exception.cpp -o obj/Exception.o
+SRCDIR=src
+OBJDIR=obj
+INCLUDEDIR=include
+EXECDIR=bin
 
-obj/SDL_Object.o: src/SDL_Object.cpp include/SDL_Object.h
-	g++ -c src/SDL_Object.cpp -o obj/SDL_Object.o
+SRC= $(wildcard $(SRCDIR)/*.cpp)
+OBJ= $(SRC:$(SRCDIR)/%.cpp=$(OBJDIR)/%.o)
+INCLUDE= $(wildcard $(INCLUDEDIR)/*.h)
+EXEC=$(EXECDIR)/tetris
 
-obj/Input.o: src/Input.cpp include/Input.h
-	g++ -c src/Input.cpp -o obj/Input.o
+all: $(EXEC)
 
-obj/Video.o: src/Video.cpp include/Video.h
-	g++ -c src/Video.cpp -o obj/Video.o
+$(EXEC): $(OBJ) $(INCLUDE)
+	$(CC) $(OBJ) -o $(EXEC) $(LDFLAGS)
 
-obj/main.o: src/main.cpp
-	g++ -c src/main.cpp -o obj/main.o
+$(OBJDIR)/%.o: $(SRCDIR)/%.cpp
+	$(CC) -c $< -o $@ $(CFLAGS)
+
+.PHONY: clean mrproper
 
 clean:
-	rm -rf obj/*.o
+	rm $(OBJ)
+
+mrproper:
+	rm $(EXEC) $(OBJ)
