@@ -17,7 +17,7 @@ all: $(EXEC)
 $(EXEC): $(OBJ) $(INCLUDE)
 	$(CC) $(OBJ) -o $(EXEC) $(LDFLAGS)
 
-$(OBJDIR)/%.o: $(SRCDIR)/%.cpp
+$(OBJDIR)/%.o: $(SRCDIR)/%.cpp $(INCLUDE)
 	$(CC) -c $< -o $@ $(CFLAGS)
 
 .PHONY: clean mrproper

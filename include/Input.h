@@ -5,11 +5,11 @@
 
     class Input {
         public:
-            char key[SDLK_LAST];
+            bool key[SDLK_LAST];
             int mousex, mousey;
             int mousexrel, mouseyrel;
-            char mousebuttons[8];
-            char quit;
+            bool mousebuttons[8];
+            bool quit;
 
             Input();
             virtual ~Input();
