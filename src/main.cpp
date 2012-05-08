@@ -5,6 +5,7 @@
 #include "../include/Video.h"
 #include "../include/Shape.h"
 #include "../include/Structure.h"
+#include "../include/Unit.h"
 
 #include <iostream>
 #include <ctime>
@@ -43,32 +44,28 @@ int main(int argc, char * argv[]) {
         };
 
         Structure structure;
-
-        Shape * unit = &array[getRand(0, arraySize-1)];
-        int x = initX, y = initY;
-        int form = 0;
-        int cForms = unit->getCForms();
+        Unit unit(array[getRand(0, arraySize-1)]);
 
         bool keyup = (!in.key[SDLK_LEFT] && !in.key[SDLK_RIGHT] && !in.key[SDLK_a] && !in.key[SDLK_d]);
         Chrono fall, key;
 
         video.fill(255, 255, 255);
-        blitInit(video, *unit, x, y);
+        blitInit(video, unit);
         sdl.update(30);
         while(!in.quit && !in.key[SDLK_ESCAPE]) {
 
             if(fall.check(1000) || ((in.key[SDLK_DOWN] || in.key[SDLK_s]) && fall.check(50))) {
                 fall.reset();
-                y++;
+                unit.bottom();
             }
 
             if(keyup || key.check(300)) {
                 key.reset();
                 if(in.key[SDLK_LEFT] || in.key[SDLK_a]) {
-                    x--;
+                    unit.left();
                 }
                 if(in.key[SDLK_RIGHT] || in.key[SDLK_d]) {
-                    x++;
+                    unit.right();
                 }
             }
 
@@ -76,28 +73,20 @@ int main(int argc, char * argv[]) {
 
             if(in.key[SDLK_UP] || in.key[SDLK_w]) {
                 in.key[SDLK_UP] = in.key[SDLK_w] = false;
-                form++;
+                unit.rotate();
             }
 
             if(in.key[SDLK_SPACE]) {
                 in.key[SDLK_SPACE] = false;
             }
 
-            if(form >= cForms) {
-                form = 0;
-            }
-
-            unit->checkX(x, wGrid, form);
-            if(structure.add(*unit, x, y)) {
-                unit = &array[getRand(0, arraySize-1)];
-                x = initX, y = initY;
-                form = 0;
-                cForms = unit->getCForms();
+            if(structure.add(unit)) {
+                unit.change(array[getRand(0, arraySize-1)]);
             }
 
             video.fill(255, 255, 255);
             video.fill(0,0,0,0,0,wGrid*squareSize,hGrid*squareSize);
-            blit(video, *unit, x, y, form);
+            blit(video, unit);
             sdl.update(30);
         }
     }

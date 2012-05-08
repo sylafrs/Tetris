@@ -45,6 +45,7 @@
 		<Unit filename="include\Shape.h" />
 		<Unit filename="include\Structure.h" />
 		<Unit filename="include\Surface.h" />
+		<Unit filename=".\include\Unit.h" />
 		<Unit filename="include\Video.h" />
 		<Unit filename="include\constantes.h" />
 		<Unit filename="include\shapes.h" />
@@ -55,6 +56,7 @@
 		<Unit filename="src\Shape.cpp" />
 		<Unit filename=".\src\Structure.cpp" />
 		<Unit filename="src\Surface.cpp" />
+		<Unit filename="src\Unit.cpp" />
 		<Unit filename="src\Video.cpp" />
 		<Unit filename="src\main.cpp" />
 		<Extensions>

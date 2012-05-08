@@ -42,14 +42,14 @@ bool Shape::check(unsigned int x, unsigned int y, unsigned int num) const {
 }
 
 bool Shape::checkX(int & x, int max, unsigned int num) const {
-    int i, j;
-    int first, last; // column
+    unsigned int i, j;
+    int first = this->size, last = 0; // column
 
     for(i = 0; i < this->size; i++) {
         for(j = 0; j < this->size; j++) {
             if(this->shapeArray[num][j][i]) {
-                if(i < first)   first = i;
-                if(i > last)    last = i;
+                if((int)i < first)   first = (int)i;
+                if((int)i > last)    last = (int)i;
             }
         }
     }
