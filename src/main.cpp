@@ -5,19 +5,30 @@
 #include "../include/Video.h"
 #include "../include/Shape.h"
 #include <iostream>
+#include <ctime>
+
+int getRand(int min, int max) {
+    return (int)((double)rand()/RAND_MAX*(max-min))+min;    
+}
 
 using namespace std;
 
 int main() {
+
+    srand(time(NULL));
    
     try {
+        // Initializes the SDL
         SDL sdl(windowTitle, windowWidth, windowHeight);
-        Input & in = sdl.getInput();
-        Video & video = sdl.getVideo();
+        Input & in = sdl.getInput();    // Inputs
+        Video & video = sdl.getVideo(); // Screen
 
+        // Surfaces
         RectSurface rouge(video, squareSize, squareSize);
         rouge.fill(255, 0, 0);
  
+        // Shapes
+        unsigned int arraySize = 7;
         Shape array[] = {
             Shape(rouge, squareShape, sSquare, cSquare, xInitSquare, yInitSquare),
             Shape(rouge, lineShape, sLine, cLine, xInitLine, yInitLine),
@@ -27,30 +38,28 @@ int main() {
             Shape(rouge, largeLShape, sLargeL, cLargeL, xInitLargeL, yInitLargeL),
             Shape(rouge, longLShape, sLongL, cLongL, xInitLongL, yInitLongL)
         };
-
-        unsigned int arraySize = 7;
-    
-        Chrono tombee, touche;
-        Shape * unit = &array[3];
-        unsigned int x = 0, y = 0;
-
+            
+        
+        Shape * unit = &array[getRand(0, arraySize-1)];
+        unsigned int x = initX, y = initY;
+        int form = 0;
+        int cForms = unit->getCForms();
+     
+        bool keyup = (!in.key[SDLK_LEFT] && !in.key[SDLK_RIGHT]);
+        Chrono fall, key;
+        
         video.fill(255, 255, 255);
         blitInit(video, *unit, x, y);
         sdl.update(30);
-
-        bool relache = (!in.key[SDLK_LEFT] && !in.key[SDLK_RIGHT]);
-        int form = 0;
-        int cForms = unit->getCForms();
-
-        while(!in.quit) {
+        while(!in.quit && !in.key[SDLK_ESCAPE]) {
             
-            if(tombee.check(1000) || (in.key[SDLK_DOWN] && tombee.check(50))) {
-                tombee.reset();  
+            if(fall.check(1000) || (in.key[SDLK_DOWN] && fall.check(50))) {
+                fall.reset();  
                 y++;              
             }
 
-            if(relache || touche.check(300)) {
-                touche.reset();
+            if(keyup || key.check(300)) {
+                key.reset();
                 if(in.key[SDLK_LEFT]) {
                     x--;
                 }
@@ -59,14 +68,19 @@ int main() {
                 }
             }
 
-            relache = (!in.key[SDLK_LEFT] && !in.key[SDLK_RIGHT]);
+            keyup = (!in.key[SDLK_LEFT] && !in.key[SDLK_RIGHT]);
 
-            if(in.key[SDLK_SPACE]) {
-                in.key[SDLK_SPACE] = false;
+            if(in.key[SDLK_UP]) {
+                in.key[SDLK_UP] = false;
                 form++;
                 if(form >= cForms) {
                     form = 0;
                 }
+            }
+
+            if(in.key[SDLK_SPACE]) {
+                in.key[SDLK_SPACE] = false;
+                
             }
 
             video.fill(255, 255, 255);

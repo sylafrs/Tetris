@@ -13,6 +13,8 @@
 
     const int wGrid = 10;
     const int hGrid = 20;
+    const int initX = 3;
+    const int initY = 0;
 
     typedef bool shape [maxShapeForms][maxShapeHeight][maxShapeWidth];
     
