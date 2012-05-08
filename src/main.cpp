@@ -8,15 +8,15 @@
 #include <ctime>
 
 int getRand(int min, int max) {
-    return (int)((double)rand()/RAND_MAX*(max-min))+min;    
+    return (int)((double)rand()/RAND_MAX*(max-min))+min;
 }
 
 using namespace std;
 
-int main() {
+int main(int argc, char * argv[]) {
 
     srand(time(NULL));
-   
+
     try {
         // Initializes the SDL
         SDL sdl(windowTitle, windowWidth, windowHeight);
@@ -26,7 +26,7 @@ int main() {
         // Surfaces
         RectSurface rouge(video, squareSize, squareSize);
         rouge.fill(255, 0, 0);
- 
+
         // Shapes
         unsigned int arraySize = 7;
         Shape array[] = {
@@ -38,24 +38,24 @@ int main() {
             Shape(rouge, largeLShape, sLargeL, cLargeL, xInitLargeL, yInitLargeL),
             Shape(rouge, longLShape, sLongL, cLongL, xInitLongL, yInitLongL)
         };
-            
-        
+
+
         Shape * unit = &array[getRand(0, arraySize-1)];
         unsigned int x = initX, y = initY;
         int form = 0;
         int cForms = unit->getCForms();
-     
+
         bool keyup = (!in.key[SDLK_LEFT] && !in.key[SDLK_RIGHT]);
         Chrono fall, key;
-        
+
         video.fill(255, 255, 255);
         blitInit(video, *unit, x, y);
         sdl.update(30);
         while(!in.quit && !in.key[SDLK_ESCAPE]) {
-            
+
             if(fall.check(1000) || (in.key[SDLK_DOWN] && fall.check(50))) {
-                fall.reset();  
-                y++;              
+                fall.reset();
+                y++;
             }
 
             if(keyup || key.check(300)) {
@@ -80,7 +80,7 @@ int main() {
 
             if(in.key[SDLK_SPACE]) {
                 in.key[SDLK_SPACE] = false;
-                
+
             }
 
             video.fill(255, 255, 255);
