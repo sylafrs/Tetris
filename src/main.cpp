@@ -32,6 +32,7 @@ int main() {
         Video & video = sdl.getVideo(); // Screen
 
         // Surfaces
+        RectSurface gameZone(video, squareSize*wGrid, squareSize*hGrid);
         RectSurface rouge(video, squareSize, squareSize);
         rouge.fill(255, 0, 0);
 
@@ -53,8 +54,12 @@ int main() {
         bool keyup = (!in.key[SDLK_LEFT] && !in.key[SDLK_RIGHT] && !in.key[SDLK_a] && !in.key[SDLK_d]);
         Chrono fall, key;
 
+        gameZone.fill(0, 0, 0);
+        blit(gameZone, unit);
+
         video.fill(255, 255, 255);
-        blit(video, unit);
+        video.blit(gameZone);
+
         sdl.update(30);
         while(!in.quit && !in.key[SDLK_ESCAPE]) {
 
@@ -91,9 +96,10 @@ int main() {
                 in.key[SDLK_SPACE] = false;
             }
 
+            gameZone.fill(0, 0, 0);
+            blit(gameZone, unit);
             video.fill(255, 255, 255);
-            video.fill(0,0,0,0,0,wGrid*squareSize,hGrid*squareSize);
-            blit(video, unit);
+            video.blit(gameZone);
             sdl.update(30);
         }
     }
