@@ -17,7 +17,11 @@ int getRand(int min, int max) {
 
 using namespace std;
 
+#ifndef __LINUX__
 int main(int argc, char * argv[]) {
+#else
+int main() {
+#endif
 
     srand(time(NULL));
 
@@ -44,18 +48,25 @@ int main(int argc, char * argv[]) {
         };
 
         Structure structure;
-        Unit unit(array[getRand(0, arraySize-1)]);
+        Unit unit(structure, array[getRand(0, arraySize-1)]);
 
         bool keyup = (!in.key[SDLK_LEFT] && !in.key[SDLK_RIGHT] && !in.key[SDLK_a] && !in.key[SDLK_d]);
         Chrono fall, key;
 
         video.fill(255, 255, 255);
-        blitInit(video, unit);
+        blit(video, unit);
         sdl.update(30);
         while(!in.quit && !in.key[SDLK_ESCAPE]) {
 
-            if(fall.check(1000) || ((in.key[SDLK_DOWN] || in.key[SDLK_s]) && fall.check(50))) {
+            if(fall.check(1000)) {
+                if(!unit.bottom()) {
+                    structure.add(unit);
+                    unit.change(array[getRand(0, arraySize-1)]);
+                }
                 fall.reset();
+            }
+
+            if((in.key[SDLK_DOWN] || in.key[SDLK_s]) && fall.check(50)) {
                 unit.bottom();
             }
 
@@ -78,10 +89,6 @@ int main(int argc, char * argv[]) {
 
             if(in.key[SDLK_SPACE]) {
                 in.key[SDLK_SPACE] = false;
-            }
-
-            if(structure.add(unit)) {
-                unit.change(array[getRand(0, arraySize-1)]);
             }
 
             video.fill(255, 255, 255);

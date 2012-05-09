@@ -1,7 +1,9 @@
 #include "../include/Unit.h"
+#include "../include/Shape.h"
+#include "../include/Structure.h"
 #include "../include/constantes.h"
 
-Unit::Unit(const Shape & shape) {
+Unit::Unit(const Structure & structure, const Shape & shape) : structure(structure) {
     change(shape);
 }
 
@@ -12,36 +14,41 @@ void Unit::change(const Shape & shape) {
     this->shape = &shape;
 }
 
-void Unit::left() {
+bool Unit::left() {
     this->x = this->x - 1;
-    this->checkX();
+    this->checkSides();
+    return true;
 }
 
-void Unit::right() {
+bool Unit::right() {
     this->x = this->x + 1;
-    this->checkX();
+    this->checkSides();
+    return true;
 }
 
 void Unit::fall() {
 
 }
 
-void Unit::bottom() {
-    this->y = this->y + 1;
-    this->checkX();
+bool Unit::bottom() {
+    bool ok = (!this->structure.check(*this));
+    if(ok) {
+        this->y = this->y + 1;
+    }
+    return ok;
 }
 
-void Unit::rotate() {
+bool Unit::rotate() {
     this->form = this->form + 1;
     if(this->form >= shape->getCForms()) {
         this->form = 0;
     }
-
-    this->checkX();
+    this->checkSides();
+    return true;
 }
 
-bool Unit::checkX() {
-    return this->shape->checkX(this->x, wGrid, this->form);
+void Unit::checkSides() {
+    this->shape->checkSides(this->x, this->y, wGrid, hGrid, this->form);
 }
 
 const Shape & Unit::getShape() const {
@@ -58,10 +65,6 @@ int Unit::getY() const {
 
 int Unit::getForm() const {
     return this->form;
-}
-
-bool blitInit(Surface & surface, const Unit & unit) {
-    return blitInit(surface, unit.getShape(), unit.getX(), unit.getY());
 }
 
 bool blit(Surface & surface, const Unit & unit) {

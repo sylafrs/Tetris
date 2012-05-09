@@ -17,7 +17,12 @@
     const int initY = 0;
 
     typedef bool shape [maxShapeForms][maxShapeHeight][maxShapeWidth];
-    
+
+    enum delimType {
+        MIN_COL, MAX_COL, MIN_LIN, MAX_LIN, D_SIZE
+    };
+    typedef int delims [maxShapeForms][D_SIZE];
+
     #include "shapes.h"
 
 #endif//CONSTANTES_H_

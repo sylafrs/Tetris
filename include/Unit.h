@@ -3,6 +3,8 @@
 
     #include "Shape.h"
 
+    class Structure;
+
     class Unit {
 
         private:
@@ -10,17 +12,20 @@
             int y;
             unsigned int form;
             const Shape * shape;
+            const Structure & structure;
 
         public:
-            Unit(const Shape & shape);
+            Unit(const Structure & structure, const Shape & shape);
             void change(const Shape & shape);
 
-            void left();
-            void right();
+            bool left();
+            bool right();
             void fall();
-            void bottom();
-            void rotate();
-            bool checkX();
+            bool bottom();
+            bool rotate();
+
+            void check();
+            void checkSides();
 
             const Shape & getShape() const ;
             int getX() const ;
@@ -28,7 +33,8 @@
             int getForm() const ;
     };
 
-    bool blitInit(Surface & surface, const Unit & unit);
+    #include "Structure.h"
+
     bool blit(Surface & surface, const Unit & unit);
 
 #endif // UNIT_H_INCLUDED
