@@ -26,26 +26,29 @@ int main() {
     srand(time(NULL));
 
     try {
-        // Initializes the SDL
         SDL sdl(windowTitle, windowWidth, windowHeight);
         Input & in = sdl.getInput();    // Inputs
         Video & video = sdl.getVideo(); // Screen
 
-        // Surfaces
         RectSurface gameZone(video, squareSize*wGrid, squareSize*hGrid);
-        RectSurface rouge(video, squareSize, squareSize);
-        rouge.fill(255, 0, 0);
 
-        // Shapes
+        ImageSurface rouge (video, "imgs/rouge.bmp");
+        ImageSurface bleu  (video, "imgs/bleu.bmp");
+        ImageSurface vert  (video, "imgs/vert.bmp");
+        ImageSurface jaune (video, "imgs/jaune.bmp");
+        ImageSurface orange(video, "imgs/orange.bmp");
+        ImageSurface cyan  (video, "imgs/cyan.bmp");
+        ImageSurface violet(video, "imgs/violet.bmp");
+
         unsigned int arraySize = 7;
         Shape array[] = {
-            Shape(rouge, squareShape, sSquare, cSquare, xInitSquare, yInitSquare),
-            Shape(rouge, lineShape, sLine, cLine, xInitLine, yInitLine),
-            Shape(rouge, zShape, sZ, cZ, xInitZ, yInitZ),
-            Shape(rouge, zShape, sS, cS, xInitS, yInitS),
-            Shape(rouge, tShape, sT, cT, xInitT, yInitT),
-            Shape(rouge, largeLShape, sLargeL, cLargeL, xInitLargeL, yInitLargeL),
-            Shape(rouge, longLShape, sLongL, cLongL, xInitLongL, yInitLongL)
+            Shape(jaune,  oShape, sO, cO, xInitO, yInitO),
+            Shape(cyan,   iShape, sI, cI, xInitI, yInitI),
+            Shape(rouge,  zShape, sZ, cZ, xInitZ, yInitZ),
+            Shape(vert,   sShape, sS, cS, xInitS, yInitS),
+            Shape(violet, tShape, sT, cT, xInitT, yInitT),
+            Shape(bleu,   jShape, sJ, cJ, xInitJ, yInitJ),
+            Shape(orange, lShape, sL, cL, xInitL, yInitL)
         };
 
         Structure structure;
