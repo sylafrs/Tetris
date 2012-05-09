@@ -33,6 +33,17 @@ RectSurface::~RectSurface() {
     
 }
 
+ImageSurface::ImageSurface(Video & video, const char * path) throw(Exception) : Surface(video) {
+    this->surface = SDL_LoadBMP(path);
+    if(this->surface == NULL) {
+        throw Exception(string("Erreur lors du chargement de l'image : ") + path + '\n' + SDL_GetError());
+    }
+}
+
+ImageSurface::~ImageSurface() {
+
+}
+
 unsigned int Surface::getWidth() const {
     return this->surface->w;
 }

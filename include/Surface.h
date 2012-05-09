@@ -38,7 +38,9 @@
     };
 
     class ImageSurface : public Surface {
-
+        public:
+            ImageSurface(Video & video, const char * path) throw(Exception);
+            virtual ~ImageSurface();
     };
 
 #endif//SURFACES_H_

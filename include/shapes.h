@@ -3,8 +3,8 @@
 #ifndef SHAPES_H_
 #define SHAPES_H_
 
-    const unsigned int sLine = 4, cLine = 2, xInitLine = 0, yInitLine = 1;
-    const shape lineShape = {
+    const unsigned int sI = 4, cI = 2, xInitI = 0, yInitI = 1;
+    const shape iShape = {
         {
             {0, 0, 0, 0},
             {1, 1, 1, 1},
@@ -19,8 +19,8 @@
         }
     }; 
     
-    const unsigned int sSquare = 2, cSquare = 1, xInitSquare = 0, yInitSquare = 0;   
-    const shape squareShape = {
+    const unsigned int sO = 2, cO = 1, xInitO = 0, yInitO = 0;   
+    const shape oShape = {
         {
             {1, 1},
             {1, 1}
@@ -51,8 +51,8 @@
         }
     };
     
-    const unsigned int sLongL = 3, cLongL = 4, xInitLongL = 0, yInitLongL = 1;
-    const shape longLShape = {
+    const unsigned int sL = 3, cL = 4, xInitL = 0, yInitL = 1;
+    const shape lShape = {
         {
             {0, 0, 0},
             {1, 1, 1},
@@ -75,8 +75,8 @@
         }
     };
     
-    const unsigned int sLargeL = 3, cLargeL = 4, xInitLargeL = 0, yInitLargeL = 1;
-    const shape largeLShape = {
+    const unsigned int sJ = 3, cJ = 4, xInitJ = 0, yInitJ = 1;
+    const shape jShape = {
         {
             {0, 0, 0},
             {1, 1, 1},
