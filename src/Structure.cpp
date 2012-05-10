@@ -27,7 +27,7 @@ const line & Structure::getLine(unsigned int n) const {
 
 bool Structure::check(const Shape & shape, int x, int y, int form) const {
 
-    if(y + shape.getMaxLine(form)+1 >= hGrid && this->structure.empty()) {
+    if(y + shape.getMaxLine(form)+1 >= hGrid) {
         return true;
     }
 
@@ -39,7 +39,6 @@ bool Structure::check(const Shape & shape, int x, int y, int form) const {
 
         unsigned int test = shape.getMaxInColumn(i, form) + y + 2;
         unsigned int lineNum = hGrid-test;
-        cout << "test : " << lineNum << endl;
         if(lineNum < cLines) {
             const line l = this->getLine(lineNum);
             touch = (l.at(x+i) != NULL);
@@ -47,7 +46,6 @@ bool Structure::check(const Shape & shape, int x, int y, int form) const {
 
         i++;
     }
-    cout << "-------------------" << endl;
     return touch;
 }
 
@@ -55,39 +53,38 @@ void Structure::add(const Shape & shape, int x, int y, int form) {
 
     const Surface & surface = shape.getSurface();
 
-    unsigned int i = shape.getMaxLine(form);
-    unsigned int minI = shape.getMinLine(form);
+    unsigned int max = y + shape.getMinLine(form);
+    unsigned int numLine = hGrid - max;
     unsigned int cLines = this->getLineCount();
-    while(i >= minI) {
-        unsigned int coord = shape.getMaxInColumn(i, form) + y + 1;
-        unsigned int lineNum = hGrid-coord;
-        while(lineNum+1 >= cLines) {
-            cout << "Ajout : " << lineNum << endl;
-            this->structure.push_front(line(wGrid, (const Surface *)NULL));
-            cLines++;
-        }
-        cout << "-------------------" << endl;
-        #error HERE
-
-        unsigned int j = shape.getMinColumn(form);
-        unsigned int maxJ = shape.getMaxColumn(form);
-        line iLine = this->getLine(lineNum);
-        while(j <= maxJ) {
-            iLine[j+x] = (shape.get(j, i, form) ? &surface : NULL);
-            j++;
-        }
-
-        i--;
+    while(cLines < numLine) {
+        this->structure.push_back(line(wGrid, (const Surface *)NULL));
+        cLines++;
     }
 
+    unsigned int i = shape.getMinLine(form);
+    unsigned int iMax = shape.getMaxLine(form);
+    unsigned int j;
+    unsigned int size = shape.getSize();
+    while(i <= iMax) {
+        numLine = hGrid - (y + i + 1);
+        cout << numLine << endl;
+        line & l = this->getLine(numLine);
+        j = 0;
+        while(j < size) {
+            if(shape.get(j, i, form)) {
+                l[j+x] = &surface;
+            }
+            j++;
+        }
+        i++;
+    }
 }
 
 unsigned int Structure::getLineCount() const {
-    return structure.size();
+    return this->structure.size();
 }
 
 const Surface * Structure::get(unsigned int x, unsigned int y) const {
-    y = hGrid - y;
     if(y > this->structure.size()) {
         return NULL;
     }
@@ -102,7 +99,7 @@ void blit(Surface & surface, const Structure & structure) {
         for(unsigned int j = 0; j < (unsigned int)wGrid; j++) {
             const Surface * square = structure.get(j, i);
             if(square != NULL) {
-                surface.blit(*square, i*square->getWidth(), j*square->getHeight());
+                surface.blit(*square, j*square->getWidth(), (hGrid-(int)(i+1))*square->getHeight());
             }
         }
     }
