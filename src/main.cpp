@@ -59,6 +59,7 @@ int main() {
 
         gameZone.fill(0, 0, 0);
         blit(gameZone, unit);
+        blit(gameZone, structure);
 
         video.fill(255, 255, 255);
         video.blit(gameZone);
@@ -101,6 +102,7 @@ int main() {
 
             gameZone.fill(0, 0, 0);
             blit(gameZone, unit);
+            blit(gameZone, structure);
             video.fill(255, 255, 255);
             video.blit(gameZone);
             sdl.update(30);

@@ -158,7 +158,7 @@ bool blit(Surface & surface, const Shape & shape,
     unsigned int i, j;
     for(i = 0; i < s; i++) {
         for(j = 0; j < s; j++) {
-            if(shape.get(i, j, num) && (i+x) >= 0 && (y+j) >= 0) {
+            if(shape.get(i, j, num) && (int)(i+(int)x) >= 0 && (int)((int)y+j) >= 0) {
                 surface.blit(surfShape, (i+x)*surfShape.getWidth(), (y+j)*surfShape.getHeight());
             }
         }
