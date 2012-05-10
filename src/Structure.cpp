@@ -1,8 +1,6 @@
 #include "../include/Structure.h"
 #include "../include/Unit.h"
 
-#include <iostream>
-
 using namespace std;
 
 bool Structure::check(const Unit & unit) const {
@@ -67,7 +65,6 @@ void Structure::add(const Shape & shape, int x, int y, int form) {
     unsigned int size = shape.getSize();
     while(i <= iMax) {
         numLine = hGrid - (y + i + 1);
-        cout << numLine << endl;
         line & l = this->getLine(numLine);
         j = 0;
         while(j < size) {
