@@ -96,7 +96,7 @@ unsigned int Shape::getMaxInColumn(unsigned int c, unsigned int form) const {
 }
 
 unsigned int Shape::getMaxInLine(unsigned int l, unsigned int form) const {
-    unsigned int c;
+    unsigned int c = 0;
     unsigned int i;
 
     unsigned int minColumn = this->getMinColumn(form);
@@ -111,12 +111,12 @@ unsigned int Shape::getMaxInLine(unsigned int l, unsigned int form) const {
 }
 
 unsigned int Shape::getMinInLine(unsigned int l, unsigned int form) const {
-    unsigned int c;
-    unsigned int i;
+    unsigned int c = this->size-1;
+    int i;
 
     unsigned int minColumn = this->getMinColumn(form);
     unsigned int maxColumn = this->getMaxColumn(form);
-    for(i = maxColumn; i >= minColumn; i--) {
+    for(i = maxColumn; i >= (int)minColumn; i--) {
         if(this->get(i, l, form)) {
             c = i;
         }

@@ -1,6 +1,8 @@
 #include "../include/Structure.h"
 #include "../include/Unit.h"
 
+#include <iostream>
+
 using namespace std;
 
 bool Structure::check(const Unit & unit) const {
@@ -10,6 +12,23 @@ bool Structure::check(const Unit & unit) const {
 void Structure::add(const Unit & unit) {
     this->add(unit.getShape(), unit.getX(), unit.getY(), unit.getForm());
 }
+
+bool Structure::allowLeft(const Unit & unit) const {
+    return this->allowLeft(unit.getShape(), unit.getX(), unit.getY(), unit.getForm());
+}
+
+bool Structure::allowRight(const Unit & unit) const {
+    return this->allowRight(unit.getShape(), unit.getX(), unit.getY(), unit.getForm());
+}
+
+bool Structure::allowRotL(const Unit & unit) const {
+    return this->allowRotL(unit.getShape(), unit.getX(), unit.getY(), unit.getForm());
+}
+
+bool Structure::allowRotR(const Unit & unit) const {
+    return this->allowRotR(unit.getShape(), unit.getX(), unit.getY(), unit.getForm());
+}
+
 
 line & Structure::getLine(unsigned int n) {
     list<line>::iterator it = this->structure.begin();
@@ -75,6 +94,8 @@ void Structure::add(const Shape & shape, int x, int y, int form) {
         }
         i++;
     }
+
+    this->checkLines();
 }
 
 unsigned int Structure::getLineCount() const {
@@ -82,11 +103,66 @@ unsigned int Structure::getLineCount() const {
 }
 
 const Surface * Structure::get(unsigned int x, unsigned int y) const {
-    if(y > this->structure.size()) {
+    if(y >= this->structure.size()) {
         return NULL;
     }
 
     return this->getLine(y).at(x);
+}
+
+bool Structure::allowLeft(const Shape & shape, int x, int y, int form) const {
+
+    unsigned int i = shape.getMinLine(form);
+    unsigned int max = shape.getMaxLine(form);
+    unsigned int c;
+
+    while(i <= max) {
+        c = shape.getMinInLine(i, form);
+        if(x + (int)c > 0) {
+            if(this->get((int)c + x - 1, hGrid - (y + i + 1)) != NULL) {
+                return false;
+            }
+        }
+
+        i++;
+    }
+
+    return true;
+}
+
+bool Structure::allowRight(const Shape & shape, int x, int y, int form) const {
+    return true;
+}
+
+bool Structure::allowRotL(const Shape & shape, int x, int y, int form) const {
+    return true;
+}
+
+bool Structure::allowRotR(const Shape & shape, int x, int y, int form) const {
+    return true;
+}
+
+void Structure::checkLines() {
+
+    list<line>::iterator it = this->structure.begin();
+    bool full = true;
+    line::iterator lineIt;
+
+    while(it != this->structure.end()) {
+        line & curLine = *it;
+        full = true;
+
+        for(lineIt  = curLine.begin(); full && lineIt != curLine.end(); lineIt++) {
+            full = (*lineIt != NULL);
+        }
+
+        if(full) {
+            this->structure.erase(it);
+        }
+        else {
+            it++;
+        }
+    }
 }
 
 void blit(Surface & surface, const Structure & structure) {

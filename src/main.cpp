@@ -65,12 +65,16 @@ int main() {
         video.blit(gameZone);
 
         sdl.update(30);
-        while(!in.quit && !in.key[SDLK_ESCAPE]) {
+        bool lose = false;
+        while(!in.quit && !in.key[SDLK_ESCAPE] && !lose) {
 
             if(fall.check(1000)) {
                 if(!unit.bottom()) {
                     structure.add(unit);
                     unit.change(array[getRand(0, arraySize-1)]);
+                    if(structure.check(unit)) {
+                        lose = true;
+                    }
                 }
                 fall.reset();
             }

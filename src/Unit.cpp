@@ -15,12 +15,20 @@ void Unit::change(const Shape & shape) {
 }
 
 bool Unit::left() {
+    if(!this->structure.allowLeft(*this)) {
+        return false;
+    }
+
     this->x = this->x - 1;
     this->checkSides();
     return true;
 }
 
 bool Unit::right() {
+    if(!this->structure.allowRight(*this)) {
+        return false;
+    }
+
     this->x = this->x + 1;
     this->checkSides();
     return true;
