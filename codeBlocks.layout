@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_layout_file>
+	<ActiveTarget name="Makefile_linux" />
+	<File name="Makefile" open="0" top="0" tabpos="6">
+		<Cursor position="15" topLine="0" />
+	</File>
+	<File name="include/Exception.h" open="0" top="0" tabpos="0">
+		<Cursor position="142" topLine="0" />
+	</File>
+	<File name="include/SDL_Object.h" open="0" top="0" tabpos="0">
+		<Cursor position="237" topLine="0" />
+	</File>
+	<File name="include/Shape.h" open="0" top="0" tabpos="0">
+		<Cursor position="215" topLine="18" />
+	</File>
+	<File name="include/Structure.h" open="0" top="0" tabpos="2">
+		<Cursor position="1130" topLine="13" />
+	</File>
+	<File name="include/Surface.h" open="1" top="0" tabpos="3">
+		<Cursor position="943" topLine="15" />
+	</File>
+	<File name="include/Video.h" open="1" top="1" tabpos="4">
+		<Cursor position="225" topLine="6" />
+	</File>
+	<File name="src/Exception.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="352" topLine="1" />
+	</File>
+	<File name="src/Input.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="152" topLine="0" />
+	</File>
+	<File name="src/SDL_Object.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="245" topLine="0" />
+	</File>
+	<File name="src/Shape.cpp" open="0" top="0" tabpos="5">
+		<Cursor position="2689" topLine="80" />
+	</File>
+	<File name="./src/Structure.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="3735" topLine="117" />
+	</File>
+	<File name="src/Surface.cpp" open="1" top="0" tabpos="2">
+		<Cursor position="178" topLine="0" />
+	</File>
+	<File name="src/Unit.cpp" open="0" top="0" tabpos="4">
+		<Cursor position="879" topLine="23" />
+	</File>
+	<File name="src/Video.cpp" open="1" top="0" tabpos="1">
+		<Cursor position="126" topLine="0" />
+	</File>
+	<File name="src/main.cpp" open="0" top="0" tabpos="1">
+		<Cursor position="580" topLine="17" />
+	</File>
+</CodeBlocks_layout_file>
