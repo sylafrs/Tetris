@@ -8,9 +8,15 @@
 
     class Video : public Surface {
 
+        private:
+            int w;
+            int h;
+
         public:
-            Video(int w, int h) throw(Exception);
+            Video(int w, int h);
             virtual ~Video();
+
+            void init() throw(Exception);
 
             void setTitle(const std::string & title);
             const SDL_PixelFormat* getFormat() const;

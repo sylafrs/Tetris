@@ -5,10 +5,10 @@
 
     class Exception {
         private:
-            std::string message;
+            const std::string message;
 
         public:
-            Exception(std::string message);
+            Exception(const std::string & message);
             virtual ~Exception();
 
             const std::string & getMessage() const;

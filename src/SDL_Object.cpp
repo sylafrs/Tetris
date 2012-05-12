@@ -11,8 +11,9 @@ using namespace std;
 SDL::SDL(const string & title, int w, int h) throw(Exception) : video(w, h) {
     if(SDL_Init(SDL_INIT_VIDEO) == -1) {
         throw Exception(string("Problème lors de l'initialisation de la SDL\n") + SDL_GetError());
-    }    
+    }
 
+    this->video.init();
     this->video.setTitle(title);
 }
 

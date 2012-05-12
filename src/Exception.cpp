@@ -1,10 +1,10 @@
 #include "../include/Exception.h"
 #include <string>
+#include <cstdio>
 
 using namespace std;
 
-Exception::Exception(string message) {
-    this->message = message;
+Exception::Exception(const string & message) : message(message) {
 }
 
 Exception::~Exception() {
@@ -16,6 +16,7 @@ const string & Exception::getMessage() const {
 }
 
 ostream & operator<<(ostream & out, const Exception & e) {
-    out << e;
+    out << e.getMessage();
     return out;
 }
+

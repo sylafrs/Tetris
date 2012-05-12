@@ -25,12 +25,14 @@ Surface::~Surface() {
 RectSurface::RectSurface(Video & video, unsigned int w, unsigned int h) throw(Exception) : Surface(video) {
     this->surface = SDL_CreateRGBSurface(SDL_HWSURFACE, w, h, sizeof(int)*8, 0, 0, 0, 0);
     if(this->surface == NULL) {
-        throw Exception(string("Erreur lors de la création d'une surface (rectangle)\n") + SDL_GetError());
+        string str("Erreur lors de la création d'une surface (rectangle)\n");
+        str += SDL_GetError();
+        throw Exception(str);
     }
 }
 
 RectSurface::~RectSurface() {
-    
+
 }
 
 ImageSurface::ImageSurface(Video & video, const char * path) throw(Exception) : Surface(video) {
@@ -52,7 +54,7 @@ unsigned int Surface::getHeight() const {
     return this->surface->h;
 }
 
-bool Surface::fill( unsigned char r, unsigned char g, unsigned char b, 
+bool Surface::fill( unsigned char r, unsigned char g, unsigned char b,
                     unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
 
     if(this->surface == NULL) {
@@ -73,11 +75,11 @@ bool Surface::fill( unsigned char r, unsigned char g, unsigned char b,
         h = this->surface->h;
     }
 
-    SDL_Rect rect = {x, y, w, h};    
+    SDL_Rect rect = {x, y, w, h};
     return (SDL_FillRect(this->surface, &rect, pixel) == 0);
 }
 
-bool Surface::blit(const Surface & surface, unsigned int x, unsigned int y, 
+bool Surface::blit(const Surface & surface, unsigned int x, unsigned int y,
                    unsigned int xx, unsigned int yy, unsigned int w, unsigned int h) {
 
     if(w == 0) {
@@ -89,7 +91,7 @@ bool Surface::blit(const Surface & surface, unsigned int x, unsigned int y,
 
     SDL_Rect srcrect = {xx, yy, w, h};
     SDL_Rect dstrect = {x, y, 0, 0};
-    
-    return (SDL_BlitSurface(surface.surface, &srcrect, this->surface, &dstrect) == 0);    
+
+    return (SDL_BlitSurface(surface.surface, &srcrect, this->surface, &dstrect) == 0);
 }
 

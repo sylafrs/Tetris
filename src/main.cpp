@@ -6,14 +6,10 @@
 #include "../include/Shape.h"
 #include "../include/Structure.h"
 #include "../include/Unit.h"
+#include "../include/Random.h"
 
 #include <iostream>
-#include <ctime>
 
-int getRand(int min, int max) {
-    //return (int)(rand()/(double)RAND_MAX*(max-min))+min;
-    return rand()%(max-min+1)+min;
-}
 
 using namespace std;
 
@@ -23,15 +19,17 @@ int main(int argc, char * argv[]) {
 int main() {
 #endif
 
-    srand(time(NULL));
-
     try {
         SDL sdl(windowTitle, windowWidth, windowHeight);
         Input & in = sdl.getInput();    // Inputs
         Video & video = sdl.getVideo(); // Screen
 
-        RectSurface gameZone(video, squareSize*wGrid, squareSize*hGrid);
+        {
+            ImageSurface fond(video, "imgs/fond.bmp");
+            video.blit(fond);
+        }
 
+        RectSurface gameZone(video, squareSize*wGrid, squareSize*hGrid);
         ImageSurface rouge (video, "imgs/rouge.bmp");
         ImageSurface bleu  (video, "imgs/bleu.bmp");
         ImageSurface vert  (video, "imgs/vert.bmp");
@@ -52,7 +50,8 @@ int main() {
         };
 
         Structure structure;
-        Unit unit(structure, array[getRand(0, arraySize-1)]);
+        Random rand;
+        Unit unit(structure, array[rand.next(0, arraySize-1)]);
 
         bool keyup = (!in.key[SDLK_LEFT] && !in.key[SDLK_RIGHT] && !in.key[SDLK_a] && !in.key[SDLK_d]);
         Chrono fall, key;
@@ -60,8 +59,6 @@ int main() {
         gameZone.fill(0, 0, 0);
         blit(gameZone, unit);
         blit(gameZone, structure);
-
-        video.fill(255, 255, 255);
         video.blit(gameZone);
 
         sdl.update(30);
@@ -71,7 +68,7 @@ int main() {
             if(fall.check(1000)) {
                 if(!unit.bottom()) {
                     structure.add(unit);
-                    unit.change(array[getRand(0, arraySize-1)]);
+                    unit.change(array[rand.next(0, arraySize-1)]);
                     if(structure.check(unit)) {
                         lose = true;
                     }
@@ -107,12 +104,11 @@ int main() {
             gameZone.fill(0, 0, 0);
             blit(gameZone, unit);
             blit(gameZone, structure);
-            video.fill(255, 255, 255);
             video.blit(gameZone);
             sdl.update(30);
         }
     }
-    catch(Exception e) {
+    catch(const Exception & e) {
         cerr << e << endl;
     }
 
