@@ -131,6 +131,21 @@ bool Structure::allowLeft(const Shape & shape, int x, int y, int form) const {
 }
 
 bool Structure::allowRight(const Shape & shape, int x, int y, int form) const {
+    unsigned int i = shape.getMinLine(form);
+    unsigned int max = shape.getMaxLine(form);
+    unsigned int c;
+
+    while(i <= max) {
+        c = shape.getMaxInLine(i, form);
+        if(x + (int)c < wGrid-1) {
+            if(this->get((int)c + x + 1, hGrid - (y + i + 1)) != NULL) {
+                return false;
+            }
+        }
+
+        i++;
+    }
+
     return true;
 }
 
@@ -157,7 +172,7 @@ void Structure::checkLines() {
         }
 
         if(full) {
-            this->structure.erase(it);
+            it = this->structure.erase(it);
         }
         else {
             it++;
