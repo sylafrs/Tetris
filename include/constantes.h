@@ -15,6 +15,12 @@
     const int hGrid = 20;
     const int initX = 3;
     const int initY = 0;
+    
+    const int fallSpeedInit = 1000;
+    const int fastFallSpeed = 50;
+    const int moveSpeed = 100;
+    
+    const int minFrameTime = 30; // = 60/maxFPS
 
     typedef bool shape [maxShapeForms][maxShapeHeight][maxShapeWidth];
 

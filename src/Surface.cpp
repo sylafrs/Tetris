@@ -16,8 +16,12 @@ Surface::Surface(Video & video, SDL_Surface * surface) : video(video) {
 }
 
 Surface::~Surface() {
+
+}
+
+void Surface::free() {
     if(this->surface != NULL) {
-        SDL_FreeSurface(this->surface);
+        SDL_FreeSurface(this->surface);    
     }
     this->surface = NULL;
 }
@@ -32,7 +36,7 @@ RectSurface::RectSurface(Video & video, unsigned int w, unsigned int h) throw(Ex
 }
 
 RectSurface::~RectSurface() {
-
+    this->free();
 }
 
 ImageSurface::ImageSurface(Video & video, const char * path) throw(Exception) : Surface(video) {
@@ -43,7 +47,7 @@ ImageSurface::ImageSurface(Video & video, const char * path) throw(Exception) : 
 }
 
 ImageSurface::~ImageSurface() {
-
+    this->free();
 }
 
 unsigned int Surface::getWidth() const {

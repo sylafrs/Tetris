@@ -4,14 +4,14 @@
 #define SURFACES_H_
 
     #include <SDL/SDL.h>
-    #include "Exception.h"    
+    #include "Exception.h"
 
     class Video;
-    
+
     class Surface {
-        protected:            
+        protected:
             SDL_Surface * surface;
-            Video & video;            
+            Video & video;
 
         public:
             Surface(Video & video);
@@ -21,14 +21,16 @@
             unsigned int getWidth() const;
             unsigned int getHeight() const;
 
-            bool fill(unsigned char r, unsigned char g, unsigned char b, 
-                      unsigned int x = 0, unsigned int y = 0, 
+            bool fill(unsigned char r, unsigned char g, unsigned char b,
+                      unsigned int x = 0, unsigned int y = 0,
                       unsigned int w = 0, unsigned int h = 0);
 
             bool blit(const Surface & surface,
-                      unsigned int x  = 0,  unsigned int y  = 0, 
+                      unsigned int x  = 0,  unsigned int y  = 0,
                       unsigned int xx = 0,  unsigned int yy = 0,
                       unsigned int w  = 0,  unsigned int h  = 0);
+
+            void free();
     };
 
     class RectSurface : public Surface {

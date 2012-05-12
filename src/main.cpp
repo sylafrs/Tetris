@@ -13,6 +13,10 @@
 
 using namespace std;
 
+void speedUp(int & current) {
+
+}
+
 #ifndef __LINUX__
 int main(int argc, char * argv[]) {
 #else
@@ -52,6 +56,8 @@ int main() {
         Structure structure;
         Random rand;
         Unit unit(structure, array[rand.next(0, arraySize-1)]);
+        
+        int fallSpeed = fallSpeedInit;
 
         bool keyup = (!in.key[SDLK_LEFT] && !in.key[SDLK_RIGHT] && !in.key[SDLK_a] && !in.key[SDLK_d]);
         Chrono fall, key;
@@ -63,10 +69,12 @@ int main() {
 
         sdl.update(30);
         bool lose = false;
+        
         while(!in.quit && !in.key[SDLK_ESCAPE] && !lose) {
 
-            if(fall.check(1000)) {
+            if(fall.check(fallSpeed)) {
                 if(!unit.bottom()) {
+                    speedUp(fallSpeed);
                     structure.add(unit);
                     unit.change(array[rand.next(0, arraySize-1)]);
                     if(structure.check(unit)) {
@@ -76,11 +84,11 @@ int main() {
                 fall.reset();
             }
 
-            if((in.key[SDLK_DOWN] || in.key[SDLK_s]) && fall.check(50)) {
+            if((in.key[SDLK_DOWN] || in.key[SDLK_s]) && fall.check(fastFallSpeed)) {
                 unit.bottom();
             }
 
-            if(keyup || key.check(300)) {
+            if(keyup || key.check(moveSpeed)) {
                 key.reset();
                 if(in.key[SDLK_LEFT] || in.key[SDLK_a]) {
                     unit.left();
@@ -105,7 +113,7 @@ int main() {
             blit(gameZone, unit);
             blit(gameZone, structure);
             video.blit(gameZone);
-            sdl.update(30);
+            sdl.update(minFrameTime);
         }
     }
     catch(const Exception & e) {
