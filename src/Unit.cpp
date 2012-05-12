@@ -35,7 +35,7 @@ bool Unit::right() {
 }
 
 void Unit::fall() {
-
+    while(this->bottom());
 }
 
 bool Unit::bottom() {

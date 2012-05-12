@@ -33,6 +33,7 @@ int main() {
             video.blit(fond);
         }
 
+        RectSurface prevZone(video, squareSize*initShapeWidth, squareSize*initShapeHeight);
         RectSurface gameZone(video, squareSize*wGrid, squareSize*hGrid);
         ImageSurface rouge (video, "imgs/rouge.bmp");
         ImageSurface bleu  (video, "imgs/bleu.bmp");
@@ -57,24 +58,33 @@ int main() {
             Shape(orange, lShape, sL, cL, xInitL, yInitL)
         };
 
-        Structure structure;
         Random rand;
-        Unit unit(structure, array[rand.next(0, arraySize-1)]);
+        rand.setMin(0);
+        rand.setMax(arraySize-1);
+        
+        Structure structure;
+        Unit unit(structure, array[rand.next()]);
+        Shape * prev = &array[rand.next()];
 
         int fallSpeed = fallSpeedInit;
 
         bool keyup = (!in.key[SDLK_LEFT] && !in.key[SDLK_RIGHT] && !in.key[SDLK_a] && !in.key[SDLK_d]);
         Chrono fall, key;
 
+        RectSurface gameZoneBG(video, squareSize*wGrid, squareSize*hGrid);
         for(unsigned int x = 0; x < wGrid; x++) {
             for(unsigned int y = 0; y < hGrid; y++) {
-                gameZone.blit(vide, x*squareSize, y*squareSize);    
+                gameZoneBG.blit(vide, x*squareSize, y*squareSize);    
             }
         }
         
+        prevZone.blit(gameZoneBG, 0, 0, 0, 0, initShapeWidth*squareSize, initShapeHeight*squareSize);
+        gameZone.blit(gameZoneBG);
         blit(gameZone, unit);
+        blit(prevZone, *prev, -prev->getInitX()/2, -prev->getInitY(), 0);
         blit(gameZone, structure);
-        video.blit(gameZone);
+        video.blit(gameZone, xGrid, yGrid);
+        video.blit(prevZone, xPrev, yPrev);
 
         sdl.update();
         bool lose = false;
@@ -87,7 +97,13 @@ int main() {
                     speedUp(fallSpeed);
                     structure.add(unit);
                                                             
-                    unit.change(array[rand.next(0, arraySize-1)]);
+                    unit.change(*prev);
+                    prev = &array[rand.next()];
+                    
+                    prevZone.blit(gameZoneBG, 0, 0, 0, 0, initShapeWidth*squareSize, initShapeHeight*squareSize);
+                    blit(prevZone, *prev, -prev->getInitX(), -prev->getInitY(), 0); 
+                    video.blit(prevZone, xPrev, yPrev);
+                    
                     if(structure.check(unit)) {
                         lose = true;
                     }
@@ -118,16 +134,28 @@ int main() {
 
             if(in.key[SDLK_SPACE]) {
                 in.key[SDLK_SPACE] = false;
-            }
-
-            for(unsigned int x = 0; x < wGrid; x++) {
-                for(unsigned int y = 0; y < hGrid; y++) {
-                    gameZone.blit(vide, x*squareSize, y*squareSize);    
+                unit.fall();
+                   
+                speedUp(fallSpeed);
+                structure.add(unit);
+                                                        
+                unit.change(*prev);
+                prev = &array[rand.next()];
+                
+                prevZone.blit(gameZoneBG, 0, 0, 0, 0, initShapeWidth*squareSize, initShapeHeight*squareSize);
+                blit(prevZone, *prev, -prev->getInitX(), -prev->getInitY(), 0); 
+                video.blit(prevZone, xPrev, yPrev);
+                
+                if(structure.check(unit)) {
+                    lose = true;
                 }
             }
+
+            
+            gameZone.blit(gameZoneBG);
             blit(gameZone, unit);
             blit(gameZone, structure);
-            video.blit(gameZone);
+            video.blit(gameZone, xGrid, yGrid);
             
             delay.wait(minFrameTime);
             sdl.update();
@@ -153,7 +181,7 @@ int main() {
                         }
                     } 
                     
-                    video.blit(gameZone);
+                    video.blit(gameZone, xGrid, yGrid);
                     delay.wait(100);
                     sdl.update();
                 }
