@@ -2,7 +2,6 @@
 #include "../include/Video.h"
 #include "../include/Input.h"
 #include "../include/Exception.h"
-#include "../include/Chrono.h"
 #include <SDL/SDL.h>
 #include <string>
 
@@ -29,9 +28,7 @@ Video & SDL::getVideo() {
     return this->video;
 }
 
-bool SDL::update(Uint32 delay) {
-
-    this->chrono.wait(delay);
+bool SDL::update() {
     this->in.update();
     return this->video.flip();
 }

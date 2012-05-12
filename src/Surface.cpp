@@ -50,6 +50,40 @@ ImageSurface::~ImageSurface() {
     this->free();
 }
 
+AnimSurface::AnimSurface(Video & video, const char * path, unsigned int width) : 
+ImageSurface(video, path), width(width){
+    this->cFrames = this->surface->w/width;
+}
+
+AnimSurface::~AnimSurface() {
+
+}
+
+unsigned int AnimSurface::getFrameWidth() const {
+    return this->width;
+}
+
+bool blit(Surface & surface, const AnimSurface & anim, int step, unsigned int x, unsigned int y) {
+    
+    if(step >= anim.getCFrames()) {
+        return false;
+    }
+    
+    unsigned int w = anim.getFrameWidth();
+    unsigned int h = anim.getHeight();
+    
+    return surface.blit(
+        anim,
+        x, y,
+        w*step, 0,
+        w, h  
+    );    
+}
+
+unsigned int AnimSurface::getCFrames() const {
+    return this->cFrames;
+}
+
 unsigned int Surface::getWidth() const {
     return this->surface->w;
 }
@@ -97,5 +131,10 @@ bool Surface::blit(const Surface & surface, unsigned int x, unsigned int y,
     SDL_Rect dstrect = {x, y, 0, 0};
 
     return (SDL_BlitSurface(surface.surface, &srcrect, this->surface, &dstrect) == 0);
+}
+
+bool Surface::setKey(unsigned char r, unsigned char g, unsigned char b) {
+    int color = SDL_MapRGB(this->surface->format, r, g, b);
+    return (SDL_SetColorKey(this->surface, SDL_SRCCOLORKEY, color) == 0);
 }
 

@@ -29,6 +29,8 @@
                       unsigned int x  = 0,  unsigned int y  = 0,
                       unsigned int xx = 0,  unsigned int yy = 0,
                       unsigned int w  = 0,  unsigned int h  = 0);
+                      
+            bool setKey(unsigned char r, unsigned char g, unsigned char b);
 
             void free();
     };
@@ -44,5 +46,19 @@
             ImageSurface(Video & video, const char * path) throw(Exception);
             virtual ~ImageSurface();
     };
+        
+    class AnimSurface : public ImageSurface {
+        private:
+            unsigned int width;
+            unsigned int cFrames;
+        public:
+            AnimSurface(Video & video, const char * path, unsigned int width);
+            virtual ~AnimSurface();
+                            
+            unsigned int getCFrames() const ;
+            unsigned int getFrameWidth() const ;
+    };
+    
+    bool blit(Surface & surface, const AnimSurface & anim, int step, unsigned int x = 0, unsigned int y = 0);
 
 #endif//SURFACES_H_

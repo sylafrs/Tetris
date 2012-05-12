@@ -12,8 +12,9 @@
 
     class Structure {
 
-        private:
+        private:            
             std::list<line> structure;
+            
             line & getLine(unsigned int n);
 
         public:
@@ -32,7 +33,9 @@
             bool check(const Shape & shape, int x, int y, int form) const ;
             void add(const Shape & shape, int x, int y, int form);
 
-            void checkLines() ;
+            bool checkLine(unsigned int l) const ;
+            bool checkLines() const ;
+            void eraseFullLines() ;
 
             unsigned int getLineCount() const ;
             const Surface * get(unsigned int line, unsigned int column) const ;
@@ -40,6 +43,8 @@
     };
 
     void blit(Surface & surface, const Structure & structure);
+    void blitLine(unsigned int l, Surface & surface, const Structure & structure);
+    void blitLineOf(unsigned int l, Surface & surface, const Surface & square);
 
     #include "Unit.h"
     #include "Shape.h"

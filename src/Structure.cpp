@@ -1,8 +1,6 @@
 #include "../include/Structure.h"
 #include "../include/Unit.h"
 
-#include <iostream>
-
 using namespace std;
 
 bool Structure::check(const Unit & unit) const {
@@ -94,8 +92,6 @@ void Structure::add(const Shape & shape, int x, int y, int form) {
         }
         i++;
     }
-
-    this->checkLines();
 }
 
 unsigned int Structure::getLineCount() const {
@@ -157,20 +153,58 @@ bool Structure::allowRotR(const Shape & shape, int x, int y, int form) const {
     return true;
 }
 
-void Structure::checkLines() {
+bool Structure::checkLine(unsigned int l) const {
+    const line & curLine = this->getLine(l);
+    
+    bool full = true;
+    line::const_iterator lineIt = curLine.begin();
+    while(full && lineIt != curLine.end()) {
+        full = (*lineIt != NULL);
+        lineIt++;
+    }
+    
+    return full;
+}
+
+bool Structure::checkLines() const {
+    list<line>::const_iterator it = this->structure.begin();
+    bool found = false;
+    bool full;
+    line::const_iterator lineIt;
+    
+    while(!found && it != this->structure.end()) {
+        const line & curLine = *it;
+        
+        full = true;
+        lineIt = curLine.begin();
+        while(full && lineIt != curLine.end()) {
+            full = (*lineIt != NULL);
+            lineIt++;
+        }
+        
+        found = full;
+        it++;
+    }
+    
+    return found;
+}
+
+void Structure::eraseFullLines() {
 
     list<line>::iterator it = this->structure.begin();
-    bool full = true;
+    bool full;
     line::iterator lineIt;
-
+    
     while(it != this->structure.end()) {
         line & curLine = *it;
+        
         full = true;
-
-        for(lineIt  = curLine.begin(); full && lineIt != curLine.end(); lineIt++) {
+        lineIt  = curLine.begin();
+        while(full && lineIt != curLine.end()) {
             full = (*lineIt != NULL);
+            lineIt++;
         }
-
+       
         if(full) {
             it = this->structure.erase(it);
         }
@@ -184,12 +218,21 @@ void blit(Surface & surface, const Structure & structure) {
     unsigned int len = structure.getLineCount();
 
     for(unsigned int i = 0; i < len; i++) {
-        for(unsigned int j = 0; j < (unsigned int)wGrid; j++) {
-            const Surface * square = structure.get(j, i);
-            if(square != NULL) {
-                surface.blit(*square, j*square->getWidth(), (hGrid-(int)(i+1))*square->getHeight());
-            }
+        blitLine(i, surface, structure);
+    }
+}
+
+void blitLine(unsigned int l, Surface & surface, const Structure & structure) {
+    for(unsigned int i = 0; i < (unsigned int)wGrid; i++) {
+        const Surface * square = structure.get(i, l);
+        if(square != NULL) {
+            surface.blit(*square, i*square->getWidth(), (hGrid-(int)(l+1))*square->getHeight());
         }
     }
 }
 
+void blitLineOf(unsigned int l, Surface & surface, const Surface & square) {
+    for(unsigned int i = 0; i < (unsigned int)wGrid; i++) {
+        surface.blit(square, i*square.getWidth(), (hGrid-(int)(l+1))*square.getHeight());
+    }
+}
