@@ -21,7 +21,7 @@ Surface::~Surface() {
 
 void Surface::free() {
     if(this->surface != NULL) {
-        SDL_FreeSurface(this->surface);    
+        SDL_FreeSurface(this->surface);
     }
     this->surface = NULL;
 }
@@ -50,7 +50,7 @@ ImageSurface::~ImageSurface() {
     this->free();
 }
 
-AnimSurface::AnimSurface(Video & video, const char * path, unsigned int width) : 
+AnimSurface::AnimSurface(Video & video, const char * path, unsigned int width) :
 ImageSurface(video, path), width(width){
     this->cFrames = this->surface->w/width;
 }
@@ -64,20 +64,20 @@ unsigned int AnimSurface::getFrameWidth() const {
 }
 
 bool blit(Surface & surface, const AnimSurface & anim, int step, unsigned int x, unsigned int y) {
-    
+
     if(step >= anim.getCFrames()) {
         return false;
     }
-    
+
     unsigned int w = anim.getFrameWidth();
     unsigned int h = anim.getHeight();
-    
+
     return surface.blit(
         anim,
         x, y,
         w*step, 0,
-        w, h  
-    );    
+        w, h
+    );
 }
 
 unsigned int AnimSurface::getCFrames() const {

@@ -14,8 +14,10 @@
             const Shape * shape;
             const Structure & structure;
 
+            const unsigned int initX, initY; 
+
         public:
-            Unit(const Structure & structure, const Shape & shape);
+            Unit(const Structure & structure, unsigned int initX, unsigned int initY, const Shape & shape);
             void change(const Shape & shape);
 
             bool left();

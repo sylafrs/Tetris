@@ -19,12 +19,16 @@
             const unsigned int initX;
             const unsigned int initY;
 
+            void init();
+
         public:
+            
             Shape(  const Surface & surface,
                     const shape & shapeArray,
                     unsigned int size, unsigned int cForms,
                     unsigned int initX, unsigned int initY);
 
+           
             virtual ~Shape();
 
             const Surface & getSurface() const;

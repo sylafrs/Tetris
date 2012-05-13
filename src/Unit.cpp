@@ -3,13 +3,14 @@
 #include "../include/Structure.h"
 #include "../include/constantes.h"
 
-Unit::Unit(const Structure & structure, const Shape & shape) : structure(structure) {
+Unit::Unit(const Structure & structure, unsigned int initX, unsigned int initY, const Shape & shape) :
+structure(structure), initX(initX), initY(initY) {
     change(shape);
 }
 
 void Unit::change(const Shape & shape) {
-    this->x = initX - shape.getInitX();
-    this->y = initY - shape.getInitY();
+    this->x = this->initX - shape.getInitX();
+    this->y = this->initY - shape.getInitY();
     this->form = 0;
     this->shape = &shape;
 }
@@ -56,7 +57,7 @@ bool Unit::rotate() {
 }
 
 void Unit::checkSides() {
-    this->shape->checkSides(this->x, this->y, wGrid, hGrid, this->form);
+    this->shape->checkSides(this->x, this->y, structure.getWGrid(), structure.getHGrid(), this->form);
 }
 
 const Shape & Unit::getShape() const {

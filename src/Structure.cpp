@@ -3,6 +3,19 @@
 
 using namespace std;
 
+Structure::Structure(unsigned int wGrid, unsigned int hGrid) :
+wGrid(wGrid), hGrid(hGrid) {
+
+}
+
+unsigned int Structure::getHGrid() const {
+    return this->hGrid;
+}
+
+unsigned int Structure::getWGrid() const {
+    return this->wGrid;
+}
+
 bool Structure::check(const Unit & unit) const {
     return this->check(unit.getShape(), unit.getX(), unit.getY(), unit.getForm());
 }
@@ -42,7 +55,7 @@ const line & Structure::getLine(unsigned int n) const {
 
 bool Structure::check(const Shape & shape, int x, int y, int form) const {
 
-    if(y + shape.getMaxLine(form)+1 >= hGrid) {
+    if(y + shape.getMaxLine(form)+1 >= this->hGrid) {
         return true;
     }
 
@@ -53,7 +66,7 @@ bool Structure::check(const Shape & shape, int x, int y, int form) const {
     while(!touch && i <= maxI) {
 
         unsigned int test = shape.getMaxInColumn(i, form) + y + 2;
-        unsigned int lineNum = hGrid-test;
+        unsigned int lineNum = this->hGrid-test;
         if(lineNum < cLines) {
             const line l = this->getLine(lineNum);
             touch = (l.at(x+i) != NULL);
@@ -69,10 +82,10 @@ void Structure::add(const Shape & shape, int x, int y, int form) {
     const Surface & surface = shape.getSurface();
 
     unsigned int max = y + shape.getMinLine(form);
-    unsigned int numLine = hGrid - max;
+    unsigned int numLine = this->hGrid - max;
     unsigned int cLines = this->getLineCount();
     while(cLines < numLine) {
-        this->structure.push_back(line(wGrid, (const Surface *)NULL));
+        this->structure.push_back(line(this->wGrid, (const Surface *)NULL));
         cLines++;
     }
 
@@ -81,7 +94,7 @@ void Structure::add(const Shape & shape, int x, int y, int form) {
     unsigned int j;
     unsigned int size = shape.getSize();
     while(i <= iMax) {
-        numLine = hGrid - (y + i + 1);
+        numLine = this->hGrid - (y + i + 1);
         line & l = this->getLine(numLine);
         j = 0;
         while(j < size) {
@@ -115,7 +128,7 @@ bool Structure::allowLeft(const Shape & shape, int x, int y, int form) const {
     while(i <= max) {
         c = shape.getMinInLine(i, form);
         if(x + (int)c > 0) {
-            if(this->get((int)c + x - 1, hGrid - (y + i + 1)) != NULL) {
+            if(this->get((int)c + x - 1, this->hGrid - (y + i + 1)) != NULL) {
                 return false;
             }
         }
@@ -133,8 +146,8 @@ bool Structure::allowRight(const Shape & shape, int x, int y, int form) const {
 
     while(i <= max) {
         c = shape.getMaxInLine(i, form);
-        if(x + (int)c < wGrid-1) {
-            if(this->get((int)c + x + 1, hGrid - (y + i + 1)) != NULL) {
+        if(x + (int)c < this->wGrid-1) {
+            if(this->get((int)c + x + 1, this->hGrid - (y + i + 1)) != NULL) {
                 return false;
             }
         }
@@ -223,16 +236,18 @@ void blit(Surface & surface, const Structure & structure) {
 }
 
 void blitLine(unsigned int l, Surface & surface, const Structure & structure) {
-    for(unsigned int i = 0; i < (unsigned int)wGrid; i++) {
+    for(unsigned int i = 0; i < structure.getWGrid(); i++) {
         const Surface * square = structure.get(i, l);
         if(square != NULL) {
-            surface.blit(*square, i*square->getWidth(), (hGrid-(int)(l+1))*square->getHeight());
+            surface.blit(*square, i*square->getWidth(), 
+                        ((int)structure.getHGrid()-(int)(l+1))*square->getHeight());
         }
     }
 }
 
-void blitLineOf(unsigned int l, Surface & surface, const Surface & square) {
-    for(unsigned int i = 0; i < (unsigned int)wGrid; i++) {
-        surface.blit(square, i*square.getWidth(), (hGrid-(int)(l+1))*square.getHeight());
+void blitLineOf(unsigned int l, Surface & surface, const Surface & square, const Structure & structure) {
+    for(unsigned int i = 0; i < structure.getWGrid(); i++) {
+        surface.blit(square, i*square.getWidth(), 
+                    ((int)structure.getHGrid()-(int)(l+1))*square.getHeight());
     }
 }

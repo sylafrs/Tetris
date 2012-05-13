@@ -13,11 +13,17 @@
     class Structure {
 
         private:            
+            const unsigned int wGrid, hGrid;
             std::list<line> structure;
             
             line & getLine(unsigned int n);
 
         public:
+            Structure(unsigned int wGrid, unsigned int hGrid);
+
+            unsigned int getHGrid() const;
+            unsigned int getWGrid() const;
+
             bool allowLeft(const Unit & unit) const;
             bool allowRight(const Unit & unit) const;
             bool allowRotL(const Unit & unit) const;
@@ -44,7 +50,7 @@
 
     void blit(Surface & surface, const Structure & structure);
     void blitLine(unsigned int l, Surface & surface, const Structure & structure);
-    void blitLineOf(unsigned int l, Surface & surface, const Surface & square);
+    void blitLineOf(unsigned int l, Surface & surface, const Surface & square, const Structure & structure);
 
     #include "Unit.h"
     #include "Shape.h"

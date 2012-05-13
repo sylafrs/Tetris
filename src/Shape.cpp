@@ -10,7 +10,10 @@ surface(surface), shapeArray(shapeArray),
 size(size), cForms(cForms),
 initX(initX), initY(initY)
 {
+    this->init();
+}
 
+void Shape::init() {
     unsigned int i, j, n;
     for(n = 0; n < this->cForms; n++) {
 
@@ -32,7 +35,6 @@ initX(initX), initY(initY)
             }
         }
     }
-
 }
 
 Shape::~Shape() {
