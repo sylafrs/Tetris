@@ -5,7 +5,7 @@
 
 using namespace std;
 
-Video::Video(int w, int h) : w(w), h(h), Surface(*this) {
+Video::Video(int w, int h) : Surface(*this), w(w), h(h) {
 
 }
 

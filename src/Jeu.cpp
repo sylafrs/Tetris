@@ -11,11 +11,11 @@ void defaultSpeedUp(unsigned int & current) {
 
 }
 
-Jeu::Jeu(SDL & sdl) throw(Exception) : sdl(sdl), changeSpeed(defaultSpeedUp), empty(NULL),
+Jeu::Jeu(SDL & sdl) throw(Exception) : sdl(sdl),
 xGrid(20), yGrid(150), wGrid(10), hGrid(20), squareSize(10),
 wNext(4), hNext(2), xNext(50), yNext(130), initX(3), initY(0),
 fallSpeedInit(1000), fastFallSpeed(50), moveSpeed(100),
-minFrameTime(30) {
+minFrameTime(30), changeSpeed(defaultSpeedUp), empty(NULL) {
 
     empty = new RectSurface(this->sdl.getVideo(), this->squareSize, this->squareSize);
     empty->fill(0, 0, 0);
