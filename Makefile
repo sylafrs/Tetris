@@ -1,6 +1,6 @@
 CC=g++
 CFLAGS=-W -Wall -ansi -pedantic
-LDFLAGS=-lSDL
+LDFLAGS=-lSDL -lSDL_mixer
 
 SRCDIR=src
 OBJDIR=obj
