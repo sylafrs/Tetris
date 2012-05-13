@@ -64,15 +64,18 @@
 		<Unit filename="Makefile">
 			<Option target="Makefile_linux" />
 		</Unit>
+		<Unit filename="include/Audio.h" />
 		<Unit filename="include/Chrono.h" />
 		<Unit filename="include/Exception.h" />
 		<Unit filename="include/Input.h" />
 		<Unit filename="include/Jeu.h" />
 		<Unit filename="include/Line.h" />
+		<Unit filename="include/Music.h" />
 		<Unit filename="./include/Random.h" />
 		<Unit filename="include/Random.h" />
 		<Unit filename="include/SDL_Object.h" />
 		<Unit filename="include/Shape.h" />
+		<Unit filename="include/Sound.h" />
 		<Unit filename="include/Structure.h" />
 		<Unit filename="include/Surface.h" />
 		<Unit filename="./include/Unit.h" />
@@ -80,14 +83,17 @@
 		<Unit filename="include/Video.h" />
 		<Unit filename="include/constantes.h" />
 		<Unit filename="include/shapes.h" />
+		<Unit filename="src/Audio.cpp" />
 		<Unit filename="src/Chrono.cpp" />
 		<Unit filename="src/Exception.cpp" />
 		<Unit filename="src/Input.cpp" />
 		<Unit filename="src/Jeu.cpp" />
+		<Unit filename="src/Music.cpp" />
 		<Unit filename="./src/Random.cpp" />
 		<Unit filename="src/Random.cpp" />
 		<Unit filename="src/SDL_Object.cpp" />
 		<Unit filename="src/Shape.cpp" />
+		<Unit filename="src/Sound.cpp" />
 		<Unit filename="./src/Structure.cpp" />
 		<Unit filename="src/Structure.cpp" />
 		<Unit filename="src/Surface.cpp" />
