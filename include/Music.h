@@ -13,6 +13,16 @@
         public:
             Music(const std::string & path) throw(Exception);
             virtual ~Music();
+            
+            void infinityPlay() const throw(Exception);
+            void play(int loops) const throw(Exception);
+            void play() const throw(Exception);
+            
+            bool paused() const ;
+            void resume() const ;
+            void pause() const ;
+            void rewind() const ;
+            void halt() const ;
     };
 
 #endif//MUSIC_H_

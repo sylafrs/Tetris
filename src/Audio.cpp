@@ -24,7 +24,7 @@ unsigned int Audio::createChannel() throw(Exception) {
     }
     this->cChannels = this->cChannels + 1;
     
-    return this->cChannels;
+    return this->cChannels-1;
 }
 
 void Audio::haltSounds() {

@@ -9,7 +9,7 @@
 
     class Sound {
         private:
-            Mix_Chunk *sound;
+            Mix_Chunk * sound;
             unsigned int channel;
                         
         public:
