@@ -177,6 +177,9 @@ void Jeu::play() throw(Exception) {
 
         if(structure.checkLines() && this->boom != NULL) {
             delay.reset();
+            if(this->boomSnd != NULL) {
+                this->boomSnd->play();
+            }
 
             RectSurface square(video, this->squareSize, this->squareSize);
             for(unsigned int step = 0; step < this->boom->getCFrames(); step++) {

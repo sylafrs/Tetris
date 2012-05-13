@@ -5,6 +5,8 @@
     #include "SDL_Object.h"
     #include "Surface.h"
     #include "Shape.h"
+    #include "Sound.h"
+    #include "Music.h"
     #include <vector>
     #include <string>
 
@@ -25,9 +27,12 @@
             std::vector<const Shape *> shapeArray;
             Surface * empty;
 
+            const Sound * boomSnd;
             const AnimSurface * boom;
             unsigned int disappearFrame;
             unsigned int animSpeed;
+            
+            const Music * music;
 
         public:
             Jeu(SDL & sdl) throw(Exception);
@@ -46,14 +51,17 @@
             void setMoveSpeed(unsigned int speed);
             void setMaxFPS(unsigned int fps);
 
-            void setEmpty(std::string image) throw(Exception);
-            void setBackground(std::string image) throw(Exception);
-            void setBoomAnimation(std::string image, unsigned int width,
+            void setEmpty(const std::string & image) throw(Exception);
+            void setBackground(const std::string & image) throw(Exception);
+            void setBoomAnimation(const std::string & image, unsigned int width,
                                   unsigned int disappearFrame, unsigned int animSpeed);
 
             void addShape(const Surface & surf, const shape & shapeShape,
                           unsigned int size, unsigned int count,
                           unsigned int initX, unsigned int initY ) throw(Exception) ;
+
+            void setBoomSound(const std::string & sound) throw(Exception);
+            void setMusic(const std::string & music) throw(Exception);
 
             void play() throw(Exception);
     };

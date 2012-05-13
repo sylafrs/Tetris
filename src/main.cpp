@@ -48,6 +48,7 @@ int main() {
         tetris.setEmpty("imgs/vide.bmp");
         tetris.setBackground("imgs/fond.bmp");
         tetris.setBoomAnimation("imgs/boom.bmp", 10, 3, 100);
+        tetris.setBoomSound("snd/boom.wav");
 
         tetris.play();
     }

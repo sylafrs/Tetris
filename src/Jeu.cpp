@@ -3,6 +3,8 @@
 #include "../include/SDL_Object.h"
 #include "../include/Surface.h"
 #include "../include/Video.h"
+#include "../include/Sound.h"
+#include "../include/Music.h"
 #include <vector>
 
 using namespace std;
@@ -13,7 +15,8 @@ wNext(4), hNext(2), xNext(50), yNext(130), initX(3), initY(0),
 xStore(50), yStore(357),
 fallSpeedInit(1000), fastFallSpeed(50), moveSpeed(100),
 minFrameTime(30), changeSpeed(NULL),
-empty(NULL), boom(NULL), disappearFrame(0), animSpeed(0) {
+empty(NULL), boomSnd(NULL), boom(NULL), disappearFrame(0), animSpeed(0), 
+music(NULL) {
 
     this->empty = new RectSurface(this->sdl.getVideo(), this->squareSize, this->squareSize);
     this->empty->fill(0, 0, 0);
@@ -28,6 +31,16 @@ Jeu::~Jeu() {
     if(this->boom != NULL) {
         delete this->boom;
         this->boom = NULL;
+    }
+    
+    if(this->boomSnd != NULL) {
+        delete this->boomSnd;
+        this->boomSnd = NULL;
+    }
+
+    if(this->music != NULL) {
+        delete this->music;
+        this->music = NULL;
     }
 
     const Shape * cur;
@@ -103,21 +116,41 @@ void Jeu::addShape(const Surface & surf, const shape & shapeShape,
     this->shapeArray.push_back(shp);
 }
 
-void Jeu::setEmpty(std::string image) throw(Exception) {
+void Jeu::setEmpty(const string & image) throw(Exception) {
+    if(this->empty != NULL) {
+        delete this->empty;
+    }
     this->empty = new ImageSurface(this->sdl.getVideo(), image.c_str());
 }
 
-void Jeu::setBoomAnimation(std::string image, unsigned int width,
+void Jeu::setBoomAnimation(const string & image, unsigned int width,
                             unsigned int disappearFrame, unsigned int animSpeed) {
 
+    if(this->boom != NULL) {
+        delete this->boom;
+    }
     this->boom = new AnimSurface(this->sdl.getVideo(), image.c_str(), width);
     this->disappearFrame = disappearFrame;
     this->animSpeed = animSpeed;
 }
 
-void Jeu::setBackground(std::string image) throw(Exception) {
+void Jeu::setBackground(const string & image) throw(Exception) {
     Video & video = this->sdl.getVideo();
     ImageSurface bg(video, image.c_str());
     video.blit(bg);
+}
+
+void Jeu::setBoomSound(const string & sound) throw(Exception) {
+    if(this->boomSnd != NULL) {
+        delete this->boomSnd;
+    }
+    this->boomSnd = new Sound(this->sdl.getAudio(), sound);
+}
+
+void Jeu::setMusic(const string & music) throw(Exception) {
+    if(this->music != NULL) {
+        delete this->music;
+    }
+    this->music = new Music(music);
 }
 

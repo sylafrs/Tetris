@@ -8,7 +8,7 @@
 using namespace std;
 
 SDL::SDL(const string & title, int w, int h) throw(Exception) : video(w, h), audio() {
-    if(SDL_Init(SDL_INIT_VIDEO) == -1) {
+    if(SDL_Init(SDL_INIT_VIDEO|SDL_INIT_AUDIO) == -1) {
         throw Exception(string("Problème lors de l'initialisation de la SDL\n") + SDL_GetError());
     }
 
@@ -26,6 +26,10 @@ Input & SDL::getInput() {
 
 Video & SDL::getVideo() {
     return this->video;
+}
+
+Audio & SDL::getAudio() {
+    return this->audio;
 }
 
 bool SDL::update() {

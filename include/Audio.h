@@ -4,9 +4,15 @@
     #include "Exception.h"
 
     class Audio {
+        private:
+            unsigned int cChannels;
+
         public:
             Audio() throw(Exception);
             virtual ~Audio();
+            
+            unsigned int createChannel() throw(Exception);
+            void haltSounds();
     
     };
 
