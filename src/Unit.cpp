@@ -1,7 +1,6 @@
 #include "../include/Unit.h"
 #include "../include/Shape.h"
 #include "../include/Structure.h"
-#include "../include/constantes.h"
 
 Unit::Unit(const Structure & structure, unsigned int initX, unsigned int initY, const Shape & shape) :
 structure(structure), initX(initX), initY(initY) {

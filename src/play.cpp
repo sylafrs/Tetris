@@ -1,21 +1,20 @@
 #include "../include/Jeu.h"
+#include "../include/Exception.h"
 #include "../include/SDL_Object.h"
-#include "../include/Surface.h"
+#include "../include/Input.h"
 #include "../include/Video.h"
-#include "../include/Shape.h"
+#include "../include/Random.h"
 #include "../include/Structure.h"
 #include "../include/Unit.h"
-#include "../include/Random.h"
+#include "../include/Surface.h"
 #include "../include/Chrono.h"
-
-#include <vector>
 
 using namespace std;
 
 void Jeu::play() throw(Exception) {
 
-    Input & in = sdl.getInput();
-    Video & video = sdl.getVideo();
+    Input & in = this->sdl.getInput();
+    Video & video = this->sdl.getVideo();
 
     RectSurface nextZone(video, this->squareSize*this->wNext,
                                 this->squareSize*this->hNext);
@@ -24,13 +23,13 @@ void Jeu::play() throw(Exception) {
                                 this->squareSize*this->hGrid);
 
     unsigned int disappearStep = 3;
-    AnimSurface boom(video, "imgs/boom.bmp", squareSize);
+    AnimSurface boom(video, "imgs/boom.bmp", this->squareSize);
 
     Random rand;
     rand.setMin(0);
     rand.setMax(this->shapeArray.size()-1);
 
-    Structure structure(wGrid, hGrid);
+    Structure structure(this->wGrid, this->hGrid);
     Unit unit(structure, this->initX, this->initY, *this->shapeArray.at(rand.next()));
     const Shape * next = (this->shapeArray.at(rand.next()));
 

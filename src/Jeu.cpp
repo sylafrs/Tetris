@@ -1,11 +1,9 @@
 #include "../include/Jeu.h"
+#include "../include/Exception.h"
 #include "../include/SDL_Object.h"
 #include "../include/Surface.h"
 #include "../include/Video.h"
-#include "../include/Shape.h"
-
 #include <vector>
-#include <iostream>
 
 using namespace std;
 
@@ -55,31 +53,33 @@ void Jeu::setNextCoords(unsigned int x, unsigned int y) {
 }
 
 void Jeu::setNextSize(unsigned int w, unsigned int h) {
-
+    this->wNext = w;
+    this->hNext = h;
 }
 
 void Jeu::setSquareSize(unsigned int s) {
-
+    this->squareSize = s;
 }
 
 void Jeu::setInitCoords(unsigned int x, unsigned int y) {
-
+    this->initX = x;
+    this->initY = y;
 }
 
 void Jeu::setChangeSpeedFunction(changeSpeedFct changeSpeed) {
-
+    this->changeSpeed = changeSpeed;
 }
 
 void Jeu::setSpeedInit(unsigned int speed) {
-
+    this->fallSpeedInit = speed;
 }
 
 void Jeu::setFastSpeed(unsigned int speed) {
-
+    this->fastFallSpeed = speed;
 }
 
 void Jeu::setMoveSpeed(unsigned int speed) {
-
+    this->moveSpeed = speed;
 }
 
 
