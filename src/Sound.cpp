@@ -25,8 +25,9 @@ void Sound::infinityPlay() const throw(Exception) {
 }
 
 void Sound::play(int loops) const throw(Exception) {
+
     if(Mix_PlayChannel(this->channel, this->sound, loops) == -1) {
-        throw(string("Erreur lors de la lecture d'un son\n")+Mix_GetError());
+        throw(Exception(string("Erreur lors de la lecture d'un son\n")+Mix_GetError()));
     }
 }
 
