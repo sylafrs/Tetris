@@ -21,9 +21,9 @@ void Jeu::play() throw(Exception) {
 
     RectSurface gameZone(video, this->squareSize*this->wGrid,
                                 this->squareSize*this->hGrid);
-
-    unsigned int disappearStep = 3;
-    AnimSurface boom(video, "imgs/boom.bmp", this->squareSize);
+                                
+    RectSurface storeZone(video, this->squareSize*this->wNext,
+                                 this->squareSize*this->hNext);
 
     Random rand;
     rand.setMin(0);
@@ -32,6 +32,8 @@ void Jeu::play() throw(Exception) {
     Structure structure(this->wGrid, this->hGrid);
     Unit unit(structure, this->initX, this->initY, *this->shapeArray.at(rand.next()));
     const Shape * next = (this->shapeArray.at(rand.next()));
+    const Shape * stored = NULL;
+    bool store = false;
 
     unsigned int fallSpeed = this->fallSpeedInit;
 
@@ -49,6 +51,8 @@ void Jeu::play() throw(Exception) {
 
     nextZone.blit(gameZoneBG, 0, 0, 0, 0, this->wNext*this->squareSize,
                                           this->hNext*this->squareSize);
+    storeZone.blit(gameZoneBG, 0, 0, 0, 0, this->wNext*this->squareSize,
+                                           this->hNext*this->squareSize);                                      
     gameZone.blit(gameZoneBG);
 
     blit(gameZone, unit);
@@ -57,6 +61,7 @@ void Jeu::play() throw(Exception) {
 
     video.blit(gameZone, this->xGrid, this->yGrid);
     video.blit(nextZone, this->xNext, this->yNext);
+    video.blit(storeZone, this->xStore, this->yStore);
 
     sdl.update();
     bool lose = false;
@@ -66,7 +71,11 @@ void Jeu::play() throw(Exception) {
 
         if(fall.check(fallSpeed)) {
             if(!unit.bottom()) {
-                this->changeSpeed(fallSpeed);
+
+                if(this->changeSpeed != NULL)
+                    this->changeSpeed(fallSpeed);
+
+                store = false;
                 structure.add(unit);
 
                 unit.change(*next);
@@ -84,13 +93,42 @@ void Jeu::play() throw(Exception) {
             fall.reset();
         }
 
+        if(in.key[SDLK_LSHIFT] && !store) {
+            store = true;
+            if(stored != NULL) {
+                const Shape * tmp = stored;
+                stored = &(unit.getShape());
+                unit.change(*tmp);
+            }
+            else {
+                stored = &(unit.getShape());
+                unit.change(*next);
+                next = (this->shapeArray.at(rand.next()));
+
+                nextZone.blit(gameZoneBG, 0, 0, 0, 0, this->wNext*this->squareSize,
+                                                      this->hNext*this->squareSize);
+                blit(nextZone, *next, -next->getInitX(), -next->getInitY(), 0);
+                video.blit(nextZone, xNext, yNext);
+            }
+            
+            storeZone.blit(gameZoneBG, 0, 0, 0, 0, this->wNext*this->squareSize,
+                                                   this->hNext*this->squareSize);
+                                                      
+            blit(storeZone, *stored, -stored->getInitX(), -stored->getInitY(), 0);
+            video.blit(storeZone, xStore, yStore);
+
+            if(structure.check(unit)) {
+                lose = true;
+            }
+        }
+
         if((in.key[SDLK_DOWN] || in.key[SDLK_s]) && fall.check(fastFallSpeed)) {
             unit.bottom();
         }
 
         if(keyup || key.check(moveSpeed)) {
             key.reset();
-            if(in.key[SDLK_LEFT] || in.key[SDLK_a]) {
+            if(in.key[SDLK_LEFT] || in.key[SDLK_q]) {
                 unit.left();
             }
             if(in.key[SDLK_RIGHT] || in.key[SDLK_d]) {
@@ -100,8 +138,8 @@ void Jeu::play() throw(Exception) {
 
         keyup = (!in.key[SDLK_LEFT] && !in.key[SDLK_RIGHT] && !in.key[SDLK_a] && !in.key[SDLK_d]);
 
-        if(in.key[SDLK_UP] || in.key[SDLK_w]) {
-            in.key[SDLK_UP] = in.key[SDLK_w] = false;
+        if(in.key[SDLK_UP] || in.key[SDLK_z]) {
+            in.key[SDLK_UP] = in.key[SDLK_z] = false;
             unit.rotate();
         }
 
@@ -109,7 +147,10 @@ void Jeu::play() throw(Exception) {
             in.key[SDLK_SPACE] = false;
             unit.fall();
 
-            this->changeSpeed(fallSpeed);
+            if(this->changeSpeed != NULL)
+                this->changeSpeed(fallSpeed);
+
+            store = false;
             structure.add(unit);
 
             unit.change(*next);
@@ -134,18 +175,18 @@ void Jeu::play() throw(Exception) {
         delay.wait(minFrameTime);
         sdl.update();
 
-        if(structure.checkLines()) {
+        if(structure.checkLines() && this->boom != NULL) {
             delay.reset();
 
-            RectSurface square(video, squareSize, squareSize);
-            for(unsigned int step = 0; step < boom.getCFrames(); step++) {
+            RectSurface square(video, this->squareSize, this->squareSize);
+            for(unsigned int step = 0; step < this->boom->getCFrames(); step++) {
 
                 square.fill(255,255,255);
-                blit(square, boom, step);
+                blit(square, *this->boom, step);
                 square.setKey(255, 255, 255);
                 for(unsigned int i = 0; i < structure.getLineCount(); i++) {
                     if(structure.checkLine(i)) {
-                        if(step < disappearStep) {
+                        if(step < this->disappearFrame) {
                             blitLine(i, gameZone, structure);
                         }
                         else {
@@ -155,8 +196,8 @@ void Jeu::play() throw(Exception) {
                     }
                 }
 
-                video.blit(gameZone, xGrid, yGrid);
-                delay.wait(100);
+                video.blit(gameZone, this->xGrid, this->yGrid);
+                delay.wait(this->animSpeed);
                 sdl.update();
             }
             structure.eraseFullLines();

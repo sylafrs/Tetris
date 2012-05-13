@@ -55,7 +55,7 @@ const line & Structure::getLine(unsigned int n) const {
 
 bool Structure::check(const Shape & shape, int x, int y, int form) const {
 
-    if(y + shape.getMaxLine(form)+1 >= this->hGrid) {
+    if(y + shape.getMaxLine(form)+1 >= (int)this->hGrid) {
         return true;
     }
 
@@ -146,7 +146,7 @@ bool Structure::allowRight(const Shape & shape, int x, int y, int form) const {
 
     while(i <= max) {
         c = shape.getMaxInLine(i, form);
-        if(x + (int)c < this->wGrid-1) {
+        if(x + (int)c < (int)this->wGrid-1) {
             if(this->get((int)c + x + 1, this->hGrid - (y + i + 1)) != NULL) {
                 return false;
             }
@@ -168,14 +168,14 @@ bool Structure::allowRotR(const Shape & shape, int x, int y, int form) const {
 
 bool Structure::checkLine(unsigned int l) const {
     const line & curLine = this->getLine(l);
-    
+
     bool full = true;
     line::const_iterator lineIt = curLine.begin();
     while(full && lineIt != curLine.end()) {
         full = (*lineIt != NULL);
         lineIt++;
     }
-    
+
     return full;
 }
 
@@ -184,21 +184,21 @@ bool Structure::checkLines() const {
     bool found = false;
     bool full;
     line::const_iterator lineIt;
-    
+
     while(!found && it != this->structure.end()) {
         const line & curLine = *it;
-        
+
         full = true;
         lineIt = curLine.begin();
         while(full && lineIt != curLine.end()) {
             full = (*lineIt != NULL);
             lineIt++;
         }
-        
+
         found = full;
         it++;
     }
-    
+
     return found;
 }
 
@@ -207,17 +207,17 @@ void Structure::eraseFullLines() {
     list<line>::iterator it = this->structure.begin();
     bool full;
     line::iterator lineIt;
-    
+
     while(it != this->structure.end()) {
         line & curLine = *it;
-        
+
         full = true;
         lineIt  = curLine.begin();
         while(full && lineIt != curLine.end()) {
             full = (*lineIt != NULL);
             lineIt++;
         }
-       
+
         if(full) {
             it = this->structure.erase(it);
         }
@@ -239,7 +239,7 @@ void blitLine(unsigned int l, Surface & surface, const Structure & structure) {
     for(unsigned int i = 0; i < structure.getWGrid(); i++) {
         const Surface * square = structure.get(i, l);
         if(square != NULL) {
-            surface.blit(*square, i*square->getWidth(), 
+            surface.blit(*square, i*square->getWidth(),
                         ((int)structure.getHGrid()-(int)(l+1))*square->getHeight());
         }
     }
@@ -247,7 +247,7 @@ void blitLine(unsigned int l, Surface & surface, const Structure & structure) {
 
 void blitLineOf(unsigned int l, Surface & surface, const Surface & square, const Structure & structure) {
     for(unsigned int i = 0; i < structure.getWGrid(); i++) {
-        surface.blit(square, i*square.getWidth(), 
+        surface.blit(square, i*square.getWidth(),
                     ((int)structure.getHGrid()-(int)(l+1))*square.getHeight());
     }
 }

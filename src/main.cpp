@@ -4,12 +4,13 @@
 #include "../include/shapes.h"
 #include "../include/Surface.h"
 
+#include <cmath>
 #include <iostream>
 
 using namespace std;
 
 void speedUp(int & current) {
-
+    current = sqrt((current*current)-100);
 }
 
 #ifndef __LINUX__
@@ -46,6 +47,7 @@ int main() {
 
         tetris.setEmpty("imgs/vide.bmp");
         tetris.setBackground("imgs/fond.bmp");
+        tetris.setBoomAnimation("imgs/boom.bmp", 10, 3, 100);
 
         tetris.play();
     }

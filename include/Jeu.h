@@ -16,17 +16,24 @@
 
             unsigned int xGrid, yGrid, wGrid, hGrid, squareSize;
             unsigned int wNext, hNext, xNext, yNext, initX, initY;
+            unsigned int xStore, yStore;
             unsigned int fallSpeedInit, fastFallSpeed, moveSpeed;
             unsigned int minFrameTime; // = 60/maxFPS
 
             changeSpeedFct changeSpeed;
+
             std::vector<const Shape *> shapeArray;
             Surface * empty;
+
+            const AnimSurface * boom;
+            unsigned int disappearFrame;
+            unsigned int animSpeed;
 
         public:
             Jeu(SDL & sdl) throw(Exception);
             virtual ~Jeu();
 
+            void setStoreCoords(unsigned int x, unsigned int y);
             void setGridCoords(unsigned int x, unsigned int y);
             void setGridSize(unsigned int w, unsigned int h);
             void setNextCoords(unsigned int x, unsigned int y);
@@ -41,6 +48,8 @@
 
             void setEmpty(std::string image) throw(Exception);
             void setBackground(std::string image) throw(Exception);
+            void setBoomAnimation(std::string image, unsigned int width,
+                                  unsigned int disappearFrame, unsigned int animSpeed);
 
             void addShape(const Surface & surf, const shape & shapeShape,
                           unsigned int size, unsigned int count,

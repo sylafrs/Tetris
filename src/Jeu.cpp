@@ -7,24 +7,27 @@
 
 using namespace std;
 
-void defaultSpeedUp(unsigned int & current) {
-
-}
-
 Jeu::Jeu(SDL & sdl) throw(Exception) : sdl(sdl),
 xGrid(20), yGrid(150), wGrid(10), hGrid(20), squareSize(10),
 wNext(4), hNext(2), xNext(50), yNext(130), initX(3), initY(0),
+xStore(50), yStore(357),
 fallSpeedInit(1000), fastFallSpeed(50), moveSpeed(100),
-minFrameTime(30), changeSpeed(defaultSpeedUp), empty(NULL) {
+minFrameTime(30), changeSpeed(NULL),
+empty(NULL), boom(NULL), disappearFrame(0), animSpeed(0) {
 
-    empty = new RectSurface(this->sdl.getVideo(), this->squareSize, this->squareSize);
-    empty->fill(0, 0, 0);
+    this->empty = new RectSurface(this->sdl.getVideo(), this->squareSize, this->squareSize);
+    this->empty->fill(0, 0, 0);
 }
 
 Jeu::~Jeu() {
-    if(empty != NULL) {
-        delete empty;
-        empty = NULL;
+    if(this->empty != NULL) {
+        delete this->empty;
+        this->empty = NULL;
+    }
+
+    if(this->boom != NULL) {
+        delete this->boom;
+        this->boom = NULL;
     }
 
     const Shape * cur;
@@ -35,6 +38,11 @@ Jeu::~Jeu() {
             delete cur;
         }
     }
+}
+
+void Jeu::setStoreCoords(unsigned int x, unsigned int y) {
+    this->xStore = x;
+    this->yStore = y;
 }
 
 void Jeu::setGridCoords(unsigned int x, unsigned int y) {
@@ -97,6 +105,14 @@ void Jeu::addShape(const Surface & surf, const shape & shapeShape,
 
 void Jeu::setEmpty(std::string image) throw(Exception) {
     this->empty = new ImageSurface(this->sdl.getVideo(), image.c_str());
+}
+
+void Jeu::setBoomAnimation(std::string image, unsigned int width,
+                            unsigned int disappearFrame, unsigned int animSpeed) {
+
+    this->boom = new AnimSurface(this->sdl.getVideo(), image.c_str(), width);
+    this->disappearFrame = disappearFrame;
+    this->animSpeed = animSpeed;
 }
 
 void Jeu::setBackground(std::string image) throw(Exception) {
