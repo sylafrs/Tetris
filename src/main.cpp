@@ -10,7 +10,6 @@
 using namespace std;
 
 void speedUp(unsigned int & current) {
-    cout << "current : " << current << endl;
     current -= current/40;
 }
 

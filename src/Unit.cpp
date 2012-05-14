@@ -60,8 +60,12 @@ bool Unit::rotate() {
 }
 
 bool Unit::rotateInv() {
+    if(!this->structure.allowRotL(*this)) {
+        return false;
+    }
+    
     this->form = this->form - 1;
-    if(this->form < 0) {
+    if((int)this->form < 0) {
         this->form = shape->getCForms() - 1;
     }
     this->checkSides();

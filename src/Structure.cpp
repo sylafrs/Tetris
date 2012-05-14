@@ -164,7 +164,7 @@ bool Structure::allowRight(const Shape & shape, int x, int y, int form) const {
 #warning (function incomplete)
 bool Structure::allowRotL(const Shape & shape, int x, int y, unsigned int form) const {
     form--;
-    if(form < 0) {
+    if((int)form < 0) {
         form = shape.getCForms();
     }
 
@@ -190,7 +190,7 @@ bool Structure::allowRotL(const Shape & shape, int x, int y, unsigned int form) 
 #warning (function incomplete)
 bool Structure::allowRotR(const Shape & shape, int x, int y, unsigned int form) const {
     form++;
-    if(form >= shape.getCForms()) {
+    if((int)form >= shape.getCForms()) {
         form = 0;
     }
 
