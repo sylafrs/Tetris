@@ -1,5 +1,5 @@
 #include "../include/Input.h"
-#include <SDL/SDL.h>
+#include "../include/SDL/SDL.h"
 
 Input::Input() {
     memset(this, 0, sizeof(*this));

@@ -1,7 +1,7 @@
 #include "../include/Video.h"
 #include "../include/Exception.h"
 #include <string>
-#include <SDL/SDL.h>
+#include "SDL/SDL.h"
 
 using namespace std;
 

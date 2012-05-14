@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Debug_win" />
-	<File name="include\Jeu.h" open="0" top="0" tabpos="0">
-		<Cursor position="1960" topLine="50" />
+	<File name="include\Game.h" open="1" top="0" tabpos="2">
+		<Cursor position="2865" topLine="61" />
 	</File>
 	<File name="include\Shape.h" open="0" top="0" tabpos="0">
 		<Cursor position="483" topLine="21" />
@@ -16,31 +16,31 @@
 	<File name="include\Unit.h" open="0" top="0" tabpos="0">
 		<Cursor position="564" topLine="18" />
 	</File>
-	<File name="src\Audio.cpp" open="1" top="0" tabpos="4">
+	<File name="src\Audio.cpp" open="0" top="0" tabpos="4">
 		<Cursor position="191" topLine="3" />
 	</File>
-	<File name="src\Chrono.cpp" open="1" top="0" tabpos="5">
+	<File name="src\Chrono.cpp" open="0" top="0" tabpos="5">
 		<Cursor position="0" topLine="0" />
 	</File>
-	<File name="src\Exception.cpp" open="1" top="0" tabpos="6">
+	<File name="src\Exception.cpp" open="0" top="0" tabpos="6">
 		<Cursor position="0" topLine="0" />
 	</File>
-	<File name="src\Input.cpp" open="1" top="0" tabpos="7">
+	<File name="src\Game.cpp" open="1" top="0" tabpos="1">
+		<Cursor position="142" topLine="45" />
+	</File>
+	<File name="src\Input.cpp" open="0" top="0" tabpos="7">
 		<Cursor position="0" topLine="0" />
 	</File>
-	<File name="src\Jeu.cpp" open="1" top="0" tabpos="2">
-		<Cursor position="3669" topLine="165" />
-	</File>
-	<File name="src\Music.cpp" open="1" top="0" tabpos="8">
+	<File name="src\Music.cpp" open="0" top="0" tabpos="8">
 		<Cursor position="137" topLine="0" />
 	</File>
-	<File name="src\Random.cpp" open="1" top="0" tabpos="9">
+	<File name="src\Random.cpp" open="0" top="0" tabpos="9">
 		<Cursor position="0" topLine="0" />
 	</File>
-	<File name="src\SDL_Object.cpp" open="1" top="0" tabpos="10">
+	<File name="src\SDL_Object.cpp" open="0" top="0" tabpos="10">
 		<Cursor position="0" topLine="0" />
 	</File>
-	<File name="src\Shape.cpp" open="1" top="1" tabpos="11">
+	<File name="src\Shape.cpp" open="0" top="0" tabpos="11">
 		<Cursor position="3458" topLine="120" />
 	</File>
 	<File name="src\Structure.cpp" open="0" top="0" tabpos="0">
@@ -52,10 +52,10 @@
 	<File name="src\Unit.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="1105" topLine="46" />
 	</File>
-	<File name="src\main.cpp" open="1" top="0" tabpos="1">
+	<File name="src\main.cpp" open="0" top="0" tabpos="1">
 		<Cursor position="1965" topLine="50" />
 	</File>
-	<File name="src\play.cpp" open="1" top="0" tabpos="3">
+	<File name="src\play.cpp" open="0" top="0" tabpos="3">
 		<Cursor position="355" topLine="0" />
 	</File>
 </CodeBlocks_layout_file>

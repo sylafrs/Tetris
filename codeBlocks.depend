@@ -3,8 +3,8 @@
 	"../include/Chrono.h"
 	<SDL/SDL.h>
 
-1336998578 c:\documents and settings\admin\bureau\tetris\include\chrono.h
-	<SDL/SDL.h>
+1337030394 c:\documents and settings\admin\bureau\tetris\include\chrono.h
+	"SDL/SDL.h"
 
 1336998579 source:c:\documents and settings\admin\bureau\tetris\src\exception.cpp
 	"../include/Exception.h"
@@ -17,8 +17,8 @@
 	"../include/Input.h"
 	<SDL/SDL.h>
 
-1336998578 c:\documents and settings\admin\bureau\tetris\include\input.h
-	<SDL/SDL.h>
+1337030394 c:\documents and settings\admin\bureau\tetris\include\input.h
+	"SDL/SDL.h"
 
 1336998579 source:c:\documents and settings\admin\bureau\tetris\src\sdl_object.cpp
 	"../include/SDL_Object.h"
@@ -35,15 +35,15 @@
 	"Exception.h"
 	<string>
 
-1336998578 c:\documents and settings\admin\bureau\tetris\include\video.h
-	<SDL/SDL.h>
+1337030394 c:\documents and settings\admin\bureau\tetris\include\video.h
+	"SDL/SDL.h"
 	<string>
 	"Exception.h"
 	"Surface.h"
 
-1336999827 c:\documents and settings\admin\bureau\tetris\include\surface.h
+1337030394 c:\documents and settings\admin\bureau\tetris\include\surface.h
 	"Video.h"
-	<SDL/SDL.h>
+	"SDL/SDL.h"
 	"Exception.h"
 
 1336998578 c:\documents and settings\admin\bureau\tetris\include\audio.h
@@ -94,8 +94,8 @@
 	<string>
 	<SDL/SDL.h>
 
-1337029542 source:c:\documents and settings\admin\bureau\tetris\src\main.cpp
-	"../include/Jeu.h"
+1337029701 source:c:\documents and settings\admin\bureau\tetris\src\main.cpp
+	"../include/Game.h"
 	"../include/SDL_Object.h"
 	"../include/constantes.h"
 	"../include/shapes.h"
@@ -163,8 +163,8 @@
 	<SDL/SDL_mixer.h>
 	<string>
 
-1337029186 source:c:\documents and settings\admin\bureau\tetris\src\play.cpp
-	"../include/Jeu.h"
+1337029701 source:c:\documents and settings\admin\bureau\tetris\src\play.cpp
+	"../include/Game.h"
 	"../include/Exception.h"
 	"../include/SDL_Object.h"
 	"../include/Input.h"
@@ -174,4 +174,207 @@
 	"../include/Unit.h"
 	"../include/Surface.h"
 	"../include/Chrono.h"
+
+1337029701 source:c:\documents and settings\admin\bureau\tetris\src\game.cpp
+	"../include/Game.h"
+	"../include/Exception.h"
+	"../include/SDL_Object.h"
+	"../include/Surface.h"
+	"../include/Video.h"
+	"../include/Sound.h"
+	"../include/Music.h"
+	<vector>
+
+1337030006 c:\documents and settings\admin\bureau\tetris\include\game.h
+	"Exception.h"
+	"SDL_Object.h"
+	"Surface.h"
+	"Shape.h"
+	"Sound.h"
+	"Music.h"
+	<vector>
+	<string>
+
+1255800450 c:\documents and settings\admin\bureau\tetris\include\sdl\sdl.h
+	"SDL_main.h"
+	"SDL_stdinc.h"
+	"SDL_audio.h"
+	"SDL_cdrom.h"
+	"SDL_cpuinfo.h"
+	"SDL_endian.h"
+	"SDL_error.h"
+	"SDL_events.h"
+	"SDL_loadso.h"
+	"SDL_mutex.h"
+	"SDL_rwops.h"
+	"SDL_thread.h"
+	"SDL_timer.h"
+	"SDL_video.h"
+	"SDL_version.h"
+	"begin_code.h"
+	"close_code.h"
+
+1255800450 c:\documents and settings\admin\bureau\tetris\include\sdl\sdl_main.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+	"begin_code.h"
+	"close_code.h"
+
+1255800450 c:\documents and settings\admin\bureau\tetris\include\sdl\sdl_stdinc.h
+	"SDL_config.h"
+	<sys/types.h>
+	<stdio.h>
+	<stdlib.h>
+	<stddef.h>
+	<stdarg.h>
+	<stdlib.h>
+	<malloc.h>
+	<stddef.h>
+	<stdarg.h>
+	<memory.h>
+	<string.h>
+	<strings.h>
+	<inttypes.h>
+	<stdint.h>
+	<ctype.h>
+	<iconv.h>
+	"begin_code.h"
+	<alloca.h>
+	<malloc.h>
+	<malloc.h>
+	<malloc.h>
+	<stdlib.h>
+	"close_code.h"
+
+1255800464 c:\documents and settings\admin\bureau\tetris\include\sdl\sdl_config.h
+	"SDL_platform.h"
+	<stdarg.h>
+
+1255800450 c:\documents and settings\admin\bureau\tetris\include\sdl\sdl_platform.h
+
+1255800450 c:\documents and settings\admin\bureau\tetris\include\sdl\begin_code.h
+
+1255800450 c:\documents and settings\admin\bureau\tetris\include\sdl\close_code.h
+
+1255800450 c:\documents and settings\admin\bureau\tetris\include\sdl\sdl_audio.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_endian.h"
+	"SDL_mutex.h"
+	"SDL_thread.h"
+	"SDL_rwops.h"
+	"begin_code.h"
+	"close_code.h"
+
+1255800450 c:\documents and settings\admin\bureau\tetris\include\sdl\sdl_error.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1255800450 c:\documents and settings\admin\bureau\tetris\include\sdl\sdl_endian.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1255800450 c:\documents and settings\admin\bureau\tetris\include\sdl\sdl_mutex.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1255800450 c:\documents and settings\admin\bureau\tetris\include\sdl\sdl_thread.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_mutex.h"
+	"begin_code.h"
+	<process.h>
+	"close_code.h"
+
+1255800450 c:\documents and settings\admin\bureau\tetris\include\sdl\sdl_rwops.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1255800450 c:\documents and settings\admin\bureau\tetris\include\sdl\sdl_cdrom.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1255800450 c:\documents and settings\admin\bureau\tetris\include\sdl\sdl_cpuinfo.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1255800450 c:\documents and settings\admin\bureau\tetris\include\sdl\sdl_events.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_active.h"
+	"SDL_keyboard.h"
+	"SDL_mouse.h"
+	"SDL_joystick.h"
+	"SDL_quit.h"
+	"begin_code.h"
+	"close_code.h"
+
+1255800450 c:\documents and settings\admin\bureau\tetris\include\sdl\sdl_active.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1255800450 c:\documents and settings\admin\bureau\tetris\include\sdl\sdl_keyboard.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_keysym.h"
+	"begin_code.h"
+	"close_code.h"
+
+1255800450 c:\documents and settings\admin\bureau\tetris\include\sdl\sdl_keysym.h
+
+1255800450 c:\documents and settings\admin\bureau\tetris\include\sdl\sdl_mouse.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1255800450 c:\documents and settings\admin\bureau\tetris\include\sdl\sdl_video.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_rwops.h"
+	"begin_code.h"
+	"close_code.h"
+
+1255800450 c:\documents and settings\admin\bureau\tetris\include\sdl\sdl_joystick.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1255800450 c:\documents and settings\admin\bureau\tetris\include\sdl\sdl_quit.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+
+1255800450 c:\documents and settings\admin\bureau\tetris\include\sdl\sdl_loadso.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1255800450 c:\documents and settings\admin\bureau\tetris\include\sdl\sdl_timer.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1255800450 c:\documents and settings\admin\bureau\tetris\include\sdl\sdl_version.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1337030102 source:c:\documents and settings\admin\bureau\tetris\src\menu.cpp
+	"../include/Game.h"
 

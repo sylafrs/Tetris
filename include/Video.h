@@ -1,7 +1,7 @@
 #ifndef VIDEO_H_
 #define VIDEO_H_
 
-    #include <SDL/SDL.h>
+    #include "SDL/SDL.h"
     #include <string>
     #include "Exception.h"
     #include "Surface.h"

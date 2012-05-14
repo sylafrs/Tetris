@@ -3,7 +3,7 @@
 #ifndef SURFACES_H_
 #define SURFACES_H_
 
-    #include <SDL/SDL.h>
+    #include "SDL/SDL.h"
     #include "Exception.h"
 
     class Video;

@@ -2,7 +2,7 @@
 #include "../include/Video.h"
 #include "../include/Input.h"
 #include "../include/Exception.h"
-#include <SDL/SDL.h>
+#include "../include/SDL/SDL.h"
 #include <string>
 
 using namespace std;
