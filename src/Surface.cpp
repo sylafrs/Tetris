@@ -62,7 +62,7 @@ unsigned int AnimSurface::getFrameWidth() const {
     return this->width;
 }
 
-bool blit(Surface & surface, const AnimSurface & anim, int step, unsigned int x, unsigned int y) {
+bool blit(Surface & surface, const AnimSurface & anim, unsigned int step, unsigned int x, unsigned int y) {
 
     if(step >= anim.getCFrames()) {
         return false;

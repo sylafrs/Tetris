@@ -1,0 +1,177 @@
+# depslib dependency file v1.0
+1336998579 source:c:\documents and settings\admin\bureau\tetris\src\chrono.cpp
+	"../include/Chrono.h"
+	<SDL/SDL.h>
+
+1336998578 c:\documents and settings\admin\bureau\tetris\include\chrono.h
+	<SDL/SDL.h>
+
+1336998579 source:c:\documents and settings\admin\bureau\tetris\src\exception.cpp
+	"../include/Exception.h"
+	<string>
+
+1336998578 c:\documents and settings\admin\bureau\tetris\include\exception.h
+	<string>
+
+1336998579 source:c:\documents and settings\admin\bureau\tetris\src\input.cpp
+	"../include/Input.h"
+	<SDL/SDL.h>
+
+1336998578 c:\documents and settings\admin\bureau\tetris\include\input.h
+	<SDL/SDL.h>
+
+1336998579 source:c:\documents and settings\admin\bureau\tetris\src\sdl_object.cpp
+	"../include/SDL_Object.h"
+	"../include/Video.h"
+	"../include/Input.h"
+	"../include/Exception.h"
+	<SDL/SDL.h>
+	<string>
+
+1336998578 c:\documents and settings\admin\bureau\tetris\include\sdl_object.h
+	"Video.h"
+	"Audio.h"
+	"Input.h"
+	"Exception.h"
+	<string>
+
+1336998578 c:\documents and settings\admin\bureau\tetris\include\video.h
+	<SDL/SDL.h>
+	<string>
+	"Exception.h"
+	"Surface.h"
+
+1336999827 c:\documents and settings\admin\bureau\tetris\include\surface.h
+	"Video.h"
+	<SDL/SDL.h>
+	"Exception.h"
+
+1336998578 c:\documents and settings\admin\bureau\tetris\include\audio.h
+	"Exception.h"
+
+1336998579 source:c:\documents and settings\admin\bureau\tetris\src\shape.cpp
+	"../include/constantes.h"
+	"../include/Surface.h"
+	"../include/Shape.h"
+
+1336998578 c:\documents and settings\admin\bureau\tetris\include\constantes.h
+
+1336998578 c:\documents and settings\admin\bureau\tetris\include\shape.h
+	"constantes.h"
+	"Surface.h"
+	"Structure.h"
+
+1336998578 c:\documents and settings\admin\bureau\tetris\include\structure.h
+	"Surface.h"
+	<vector>
+	<list>
+	"Unit.h"
+	"Shape.h"
+
+1336998578 c:\documents and settings\admin\bureau\tetris\include\unit.h
+	"Shape.h"
+	"Structure.h"
+
+1336998579 source:c:\documents and settings\admin\bureau\tetris\src\structure.cpp
+	"../include/Structure.h"
+	"../include/Unit.h"
+
+1336999827 source:c:\documents and settings\admin\bureau\tetris\src\surface.cpp
+	"../include/Surface.h"
+	"../include/Video.h"
+	"../include/Exception.h"
+	<SDL/SDL.h>
+	<string>
+
+1336998579 source:c:\documents and settings\admin\bureau\tetris\src\unit.cpp
+	"../include/Unit.h"
+	"../include/Shape.h"
+	"../include/Structure.h"
+
+1336998579 source:c:\documents and settings\admin\bureau\tetris\src\video.cpp
+	"../include/Video.h"
+	"../include/Exception.h"
+	<string>
+	<SDL/SDL.h>
+
+1337002830 source:c:\documents and settings\admin\bureau\tetris\src\main.cpp
+	"../include/Jeu.h"
+	"../include/SDL_Object.h"
+	"../include/constantes.h"
+	"../include/shapes.h"
+	"../include/Surface.h"
+	<cmath>
+	<iostream>
+
+1336998578 c:\documents and settings\admin\bureau\tetris\include\jeu.h
+	"Exception.h"
+	"SDL_Object.h"
+	"Surface.h"
+	"Shape.h"
+	"Sound.h"
+	"Music.h"
+	<vector>
+	<string>
+
+1336998578 c:\documents and settings\admin\bureau\tetris\include\sound.h
+	"Exception.h"
+	"Audio.h"
+	<SDL/SDL_mixer.h>
+	<string>
+
+1336998578 c:\documents and settings\admin\bureau\tetris\include\music.h
+	"Exception.h"
+	<SDL/SDL_mixer.h>
+	<string>
+
+1336998578 c:\documents and settings\admin\bureau\tetris\include\shapes.h
+	"constantes.h"
+
+1336998579 source:c:\documents and settings\admin\bureau\tetris\src\audio.cpp
+	"../include/Audio.h"
+	"../include/Exception.h"
+	<SDL/SDL_mixer.h>
+	<string>
+
+1336998579 source:c:\documents and settings\admin\bureau\tetris\src\jeu.cpp
+	"../include/Jeu.h"
+	"../include/Exception.h"
+	"../include/SDL_Object.h"
+	"../include/Surface.h"
+	"../include/Video.h"
+	"../include/Sound.h"
+	"../include/Music.h"
+	<vector>
+
+1336998579 source:c:\documents and settings\admin\bureau\tetris\src\music.cpp
+	"../include/Music.h"
+	"../include/Exception.h"
+	<SDL/SDL_mixer.h>
+	<string>
+
+1336998579 source:c:\documents and settings\admin\bureau\tetris\src\random.cpp
+	"../include/Random.h"
+	<ctime>
+	<cstdlib>
+
+1336998578 c:\documents and settings\admin\bureau\tetris\include\random.h
+
+1336998579 source:c:\documents and settings\admin\bureau\tetris\src\sound.cpp
+	"../include/Exception.h"
+	"../include/Sound.h"
+	"../include/Audio.h"
+	<SDL/SDL_mixer.h>
+	<string>
+
+1336998579 source:c:\documents and settings\admin\bureau\tetris\src\play.cpp
+	"../include/Jeu.h"
+	"../include/Exception.h"
+	"../include/SDL_Object.h"
+	"../include/Input.h"
+	"../include/Video.h"
+	"../include/Random.h"
+	"../include/Structure.h"
+	"../include/Unit.h"
+	"../include/Surface.h"
+	"../include/Chrono.h"
+

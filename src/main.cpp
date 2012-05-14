@@ -29,13 +29,13 @@ int main() {
 
         Jeu tetris(sdl);
 
-        ImageSurface  rouge(video, "imgs/rouge.bmp");
-        ImageSurface   bleu(video, "imgs/bleu.bmp");
-        ImageSurface   vert(video, "imgs/vert.bmp");
-        ImageSurface  jaune(video, "imgs/jaune.bmp");
-        ImageSurface orange(video, "imgs/orange.bmp");
-        ImageSurface   cyan(video, "imgs/cyan.bmp");
-        ImageSurface violet(video, "imgs/violet.bmp");
+        ImageSurface  rouge(video, "../imgs/rouge.bmp");
+        ImageSurface   bleu(video, "../imgs/bleu.bmp");
+        ImageSurface   vert(video, "../imgs/vert.bmp");
+        ImageSurface  jaune(video, "../imgs/jaune.bmp");
+        ImageSurface orange(video, "../imgs/orange.bmp");
+        ImageSurface   cyan(video, "../imgs/cyan.bmp");
+        ImageSurface violet(video, "../imgs/violet.bmp");
 
         tetris.addShape(rouge,  zShape, sZ, cZ, xInitZ, yInitZ);
         tetris.addShape(bleu,   jShape, sJ, cJ, xInitJ, yInitJ);
@@ -45,10 +45,10 @@ int main() {
         tetris.addShape(cyan,   iShape, sI, cI, xInitI, yInitI);
         tetris.addShape(violet, tShape, sT, cT, xInitT, yInitT);
 
-        tetris.setEmpty("imgs/vide.bmp");
-        tetris.setBackground("imgs/fond.bmp");
-        tetris.setBoomAnimation("imgs/boom.bmp", 10, 3, 100);
-        tetris.setBoomSound("snd/boom.wav");
+        tetris.setEmpty("../imgs/vide.bmp");
+        tetris.setBackground("../imgs/fond.bmp");
+        tetris.setBoomAnimation("../imgs/boom.bmp", 10, 3, 100);
+        tetris.setBoomSound("../snd/boom.wav");
 
         tetris.play();
     }
