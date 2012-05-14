@@ -20,6 +20,7 @@
 
         public:
             Structure(unsigned int wGrid, unsigned int hGrid);
+            virtual ~Structure();
 
             unsigned int getHGrid() const;
             unsigned int getWGrid() const;
@@ -42,8 +43,9 @@
             void add(const Shape & shape, int x, int y, int form);
 
             bool checkLine(unsigned int l) const ;
-            bool checkLines() const ;
+            unsigned int checkLines() const ;
             void eraseFullLines() ;
+            void clear();
 
             unsigned int getLineCount() const ;
             const Surface * get(unsigned int line, unsigned int column) const ;

@@ -8,6 +8,10 @@ wGrid(wGrid), hGrid(hGrid) {
 
 }
 
+Structure::~Structure() {
+    this->structure.clear();
+}
+
 unsigned int Structure::getHGrid() const {
     return this->hGrid;
 }
@@ -157,14 +161,56 @@ bool Structure::allowRight(const Shape & shape, int x, int y, int form) const {
     return true;
 }
 
+#warning (function incomplete)
 bool Structure::allowRotL(const Shape & shape, int x, int y, unsigned int form) const {
+    form--;
+    if(form < 0) {
+        form = shape.getCForms();
+    }
 
-    return true;
+    shape.checkSides(x, y, this->wGrid, this->hGrid, form);
+
+    unsigned int i = shape.getMinLine(form);
+    unsigned int iMax = shape.getMaxLine(form);
+    unsigned int j, l;
+    unsigned int jMax = shape.getSize();
+    bool ok = true;
+    while(i <= iMax && ok) {
+
+        l = this->hGrid - (y + i + 1);
+        for(j = 0; j < jMax && ok; j++) {
+            ok = (shape.get(j, i, form) != 1 || this->get(x+j, l) == NULL);
+        }
+        i++;
+    }
+
+    return ok;
 }
 
+#warning (function incomplete)
 bool Structure::allowRotR(const Shape & shape, int x, int y, unsigned int form) const {
+    form++;
+    if(form >= shape.getCForms()) {
+        form = 0;
+    }
 
-    return true;
+    shape.checkSides(x, y, this->wGrid, this->hGrid, form);
+
+    unsigned int i = shape.getMinLine(form);
+    unsigned int iMax = shape.getMaxLine(form);
+    unsigned int j, l;
+    unsigned int jMax = shape.getSize();
+    bool ok = true;
+    while(i <= iMax && ok) {
+
+        l = this->hGrid - (y + i + 1);
+        for(j = 0; j < jMax && ok; j++) {
+            ok = (shape.get(j, i, form) != 1 || this->get(x+j, l) == NULL);
+        }
+        i++;
+    }
+
+    return ok;
 }
 
 bool Structure::checkLine(unsigned int l) const {
@@ -180,13 +226,13 @@ bool Structure::checkLine(unsigned int l) const {
     return full;
 }
 
-bool Structure::checkLines() const {
+unsigned int Structure::checkLines() const {
     list<line>::const_iterator it = this->structure.begin();
-    bool found = false;
+    unsigned int cLines = 0;
     bool full;
     line::const_iterator lineIt;
 
-    while(!found && it != this->structure.end()) {
+    while(it != this->structure.end()) {
         const line & curLine = *it;
 
         full = true;
@@ -196,11 +242,13 @@ bool Structure::checkLines() const {
             lineIt++;
         }
 
-        found = full;
+        if(full) {
+            cLines++;
+        }
         it++;
     }
 
-    return found;
+    return cLines;
 }
 
 void Structure::eraseFullLines() {
@@ -226,6 +274,10 @@ void Structure::eraseFullLines() {
             it++;
         }
     }
+}
+
+void Structure::clear() {
+    this->structure.clear();
 }
 
 void blit(Surface & surface, const Structure & structure) {

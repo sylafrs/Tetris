@@ -47,6 +47,10 @@ bool Unit::bottom() {
 }
 
 bool Unit::rotate() {
+    if(!this->structure.allowRotR(*this)) {
+        return false;
+    }
+
     this->form = this->form + 1;
     if(this->form >= shape->getCForms()) {
         this->form = 0;

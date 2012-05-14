@@ -1,4 +1,4 @@
-#include "../include/Jeu.h"
+#include "../include/Game.h"
 #include "../include/Exception.h"
 #include "../include/SDL_Object.h"
 #include "../include/Input.h"
@@ -11,7 +11,7 @@
 
 using namespace std;
 
-void Jeu::play() throw(Exception) {
+void Game::play() throw(Exception) {
 
     Input & in = this->sdl.getInput();
     Video & video = this->sdl.getVideo();
@@ -63,11 +63,30 @@ void Jeu::play() throw(Exception) {
     video.blit(nextZone, this->xNext, this->yNext);
     video.blit(storeZone, this->xStore, this->yStore);
 
+    if(this->digits != NULL) {
+        for(unsigned int i = 0; i < this->cDigits; i++) {
+            blit(video, *this->digits, 0,
+                        this->xCLines + (this->digits->getFrameWidth() + this->digitsSpace)*i,
+                        this->yCLines);
+        }
+    }
+
     sdl.update();
     bool lose = false;
 
     Chrono delay;
+    unsigned int cLines = 0;
     while(!in.quit && !in.key[SDLK_ESCAPE] && !lose) {
+
+        if(in.key[SDLK_m] && this->music != NULL) {
+            in.key[SDLK_m] = false;
+            if(this->music->paused()) {
+                this->music->resume();
+            }
+            else {
+                this->music->pause();
+            }
+        }
 
         if(fall.check(fallSpeed)) {
             if(!unit.bottom()) {
@@ -168,9 +187,34 @@ void Jeu::play() throw(Exception) {
         delay.wait(minFrameTime);
         sdl.update();
 
-        if(structure.checkLines() && this->boom != NULL) {
-            if(this->changeSpeed != NULL)
-                this->changeSpeed(fallSpeed);
+        unsigned int lines = structure.checkLines();
+        if(lines > 0 && this->boom != NULL) {
+            cLines+=lines;
+
+            if(this->digits != NULL) {
+                unsigned int div = 1;
+                unsigned int i, d;
+                unsigned int tmpCLines = cLines;
+                for(i = 0; i < this->cDigits - 1; i++) {
+                    div *= 10;
+                }
+                for(i = 0; i < this->cDigits; i++) {
+                    d = tmpCLines/div;
+                    tmpCLines -= (d*div);
+                    div /= 10;
+
+                    blit(video, *this->digits, d,
+                         this->xCLines+(this->digits->getFrameWidth()+this->digitsSpace)*i,
+                         this->yCLines);
+                }
+            }
+
+            if(this->changeSpeed != NULL) {
+                while(lines > 0) {
+                    this->changeSpeed(fallSpeed);
+                    lines--;
+                }
+            }
 
             if(this->boom != NULL) {
                 delay.reset();
@@ -205,4 +249,33 @@ void Jeu::play() throw(Exception) {
         }
     }
 
+    if(this->boom != NULL && !in.quit && !in.key[SDLK_ESCAPE]) {
+        for(unsigned int repeat = 0; repeat < 3; repeat++) {
+            if(this->boomSnd != NULL) {
+                this->boomSnd->play();
+            }
+
+            RectSurface square(video, this->squareSize, this->squareSize);
+            for(unsigned int step = 0; step < this->boom->getCFrames(); step++) {
+
+                square.fill(255,255,255);
+                blit(square, *this->boom, step);
+                square.setKey(255, 255, 255);
+                for(unsigned int i = 0; i < this->hGrid; i++) {
+                    if(step < this->disappearFrame) {
+                        structure.clear();
+                    }
+                    else {
+                        blitLineOf(i, gameZone, *empty, structure);
+                    }
+                    blitLineOf(i, gameZone, square, structure);
+                }
+
+                video.blit(gameZone, this->xGrid, this->yGrid);
+                delay.wait(this->animSpeed);
+                sdl.update();
+            }
+        }
+    }
 }
+

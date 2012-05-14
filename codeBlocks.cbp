@@ -3,14 +3,14 @@
 	<FileVersion major="1" minor="6" />
 	<Project>
 		<Option title="Tetris" />
-		<Option makefile_is_custom="1" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug_win">
-				<Option output="bin/Tetris" prefix_auto="1" extension_auto="1" />
-				<Option object_output="obj/" />
-				<Option type="0" />
+				<Option output="bin\Tetris" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="bin" />
+				<Option object_output="obj\" />
+				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
@@ -19,11 +19,13 @@
 					<Add library="mingw32" />
 					<Add library="SDLmain" />
 					<Add library="SDL" />
+					<Add library="SDL_mixer" />
 				</Linker>
 			</Target>
 			<Target title="Release_win">
-				<Option output="bin/Tetris" prefix_auto="1" extension_auto="1" />
-				<Option object_output="obj/" />
+				<Option output="bin\Tetris" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="bin" />
+				<Option object_output="obj\" />
 				<Option type="0" />
 				<Option compiler="gcc" />
 				<Compiler>
@@ -34,8 +36,8 @@
 				</Linker>
 			</Target>
 			<Target title="Makefile_linux">
-				<Option output="bin/tetris" prefix_auto="1" extension_auto="1" />
-				<Option object_output="obj/" />
+				<Option output="bin\tetris" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj\" />
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Option use_console_runner="0" />
@@ -61,46 +63,39 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
-		<Unit filename="Makefile">
-			<Option target="Makefile_linux" />
-		</Unit>
-		<Unit filename="include/Audio.h" />
-		<Unit filename="include/Chrono.h" />
-		<Unit filename="include/Exception.h" />
-		<Unit filename="include/Input.h" />
-		<Unit filename="include/Jeu.h" />
-		<Unit filename="include/Line.h" />
-		<Unit filename="include/Music.h" />
-		<Unit filename="./include/Random.h" />
-		<Unit filename="include/Random.h" />
-		<Unit filename="include/SDL_Object.h" />
-		<Unit filename="include/Shape.h" />
-		<Unit filename="include/Sound.h" />
-		<Unit filename="include/Structure.h" />
-		<Unit filename="include/Surface.h" />
-		<Unit filename="./include/Unit.h" />
-		<Unit filename="include/Unit.h" />
-		<Unit filename="include/Video.h" />
-		<Unit filename="include/constantes.h" />
-		<Unit filename="include/shapes.h" />
-		<Unit filename="src/Audio.cpp" />
-		<Unit filename="src/Chrono.cpp" />
-		<Unit filename="src/Exception.cpp" />
-		<Unit filename="src/Input.cpp" />
-		<Unit filename="src/Jeu.cpp" />
-		<Unit filename="src/Music.cpp" />
-		<Unit filename="./src/Random.cpp" />
-		<Unit filename="src/Random.cpp" />
-		<Unit filename="src/SDL_Object.cpp" />
-		<Unit filename="src/Shape.cpp" />
-		<Unit filename="src/Sound.cpp" />
-		<Unit filename="./src/Structure.cpp" />
-		<Unit filename="src/Structure.cpp" />
-		<Unit filename="src/Surface.cpp" />
-		<Unit filename="src/Unit.cpp" />
-		<Unit filename="src/Video.cpp" />
-		<Unit filename="src/main.cpp" />
-		<Unit filename="src/play.cpp" />
+		<Unit filename="Makefile" />
+		<Unit filename="include\Audio.h" />
+		<Unit filename="include\Chrono.h" />
+		<Unit filename="include\Exception.h" />
+		<Unit filename="include\Input.h" />
+		<Unit filename="include\Game.h" />
+		<Unit filename="include\Music.h" />
+		<Unit filename="include\Random.h" />
+		<Unit filename="include\SDL_Object.h" />
+		<Unit filename="include\Shape.h" />
+		<Unit filename="include\Sound.h" />
+		<Unit filename="include\Structure.h" />
+		<Unit filename="include\Surface.h" />
+		<Unit filename="include\Unit.h" />
+		<Unit filename="include\Video.h" />
+		<Unit filename="include\constantes.h" />
+		<Unit filename="include\shapes.h" />
+		<Unit filename="src\Audio.cpp" />
+		<Unit filename="src\Chrono.cpp" />
+		<Unit filename="src\Exception.cpp" />
+		<Unit filename="src\Input.cpp" />
+		<Unit filename="src\Game.cpp" />
+		<Unit filename="src\Music.cpp" />
+		<Unit filename="src\Random.cpp" />
+		<Unit filename="src\SDL_Object.cpp" />
+		<Unit filename="src\Shape.cpp" />
+		<Unit filename="src\Sound.cpp" />
+		<Unit filename="src\Structure.cpp" />
+		<Unit filename="src\Surface.cpp" />
+		<Unit filename="src\Unit.cpp" />
+		<Unit filename="src\Video.cpp" />
+		<Unit filename="src\main.cpp" />
+		<Unit filename="src\play.cpp" />
 		<Extensions>
 			<code_completion />
 			<debugger />

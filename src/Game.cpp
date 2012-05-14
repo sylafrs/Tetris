@@ -1,4 +1,4 @@
-#include "../include/Jeu.h"
+#include "../include/Game.h"
 #include "../include/Exception.h"
 #include "../include/SDL_Object.h"
 #include "../include/Surface.h"
@@ -9,20 +9,20 @@
 
 using namespace std;
 
-Jeu::Jeu(SDL & sdl) throw(Exception) : sdl(sdl),
+Game::Game(SDL & sdl) throw(Exception) : sdl(sdl),
 xGrid(20), yGrid(150), wGrid(10), hGrid(20), squareSize(10),
 wNext(4), hNext(2), xNext(50), yNext(130), initX(3), initY(0),
 xStore(50), yStore(357),
 fallSpeedInit(1000), fastFallSpeed(50), moveSpeed(100),
 minFrameTime(30), changeSpeed(NULL),
 empty(NULL), boomSnd(NULL), boom(NULL), disappearFrame(0), animSpeed(0),
-music(NULL) {
+music(NULL), digits(NULL), xCLines(180), yCLines(186), digitsSpace(0), cDigits(3) {
 
     this->empty = new RectSurface(this->sdl.getVideo(), this->squareSize, this->squareSize);
     this->empty->fill(0, 0, 0);
 }
 
-Jeu::~Jeu() {
+Game::~Game() {
     if(this->empty != NULL) {
         delete this->empty;
         this->empty = NULL;
@@ -43,6 +43,11 @@ Jeu::~Jeu() {
         this->music = NULL;
     }
 
+    if(this->digits != NULL) {
+        delete this->digits;
+        this->digits = NULL;
+    }
+
     const Shape * cur;
     while(!this->shapeArray.empty()) {
         cur = this->shapeArray.back();
@@ -53,62 +58,62 @@ Jeu::~Jeu() {
     }
 }
 
-void Jeu::setStoreCoords(unsigned int x, unsigned int y) {
+void Game::setStoreCoords(unsigned int x, unsigned int y) {
     this->xStore = x;
     this->yStore = y;
 }
 
-void Jeu::setGridCoords(unsigned int x, unsigned int y) {
+void Game::setGridCoords(unsigned int x, unsigned int y) {
     this->xGrid = x;
     this->yGrid = y;
 }
 
-void Jeu::setGridSize(unsigned int w, unsigned int h) {
+void Game::setGridSize(unsigned int w, unsigned int h) {
     this->wGrid = w;
     this->hGrid = h;
 }
 
-void Jeu::setNextCoords(unsigned int x, unsigned int y) {
+void Game::setNextCoords(unsigned int x, unsigned int y) {
     this->xNext = x;
     this->yNext = y;
 }
 
-void Jeu::setNextSize(unsigned int w, unsigned int h) {
+void Game::setNextSize(unsigned int w, unsigned int h) {
     this->wNext = w;
     this->hNext = h;
 }
 
-void Jeu::setSquareSize(unsigned int s) {
+void Game::setSquareSize(unsigned int s) {
     this->squareSize = s;
 }
 
-void Jeu::setInitCoords(unsigned int x, unsigned int y) {
+void Game::setInitCoords(unsigned int x, unsigned int y) {
     this->initX = x;
     this->initY = y;
 }
 
-void Jeu::setChangeSpeedFunction(changeSpeedFct changeSpeed) {
+void Game::setChangeSpeedFunction(changeSpeedFct changeSpeed) {
     this->changeSpeed = changeSpeed;
 }
 
-void Jeu::setSpeedInit(unsigned int speed) {
+void Game::setSpeedInit(unsigned int speed) {
     this->fallSpeedInit = speed;
 }
 
-void Jeu::setFastSpeed(unsigned int speed) {
+void Game::setFastSpeed(unsigned int speed) {
     this->fastFallSpeed = speed;
 }
 
-void Jeu::setMoveSpeed(unsigned int speed) {
+void Game::setMoveSpeed(unsigned int speed) {
     this->moveSpeed = speed;
 }
 
 
-void Jeu::setMaxFPS(unsigned int fps) {
+void Game::setMaxFPS(unsigned int fps) {
     this->minFrameTime = 60/fps;
 }
 
-void Jeu::addShape(const Surface & surf, const shape & shapeShape,
+void Game::addShape(const Surface & surf, const shape & shapeShape,
                    unsigned int size, unsigned int count,
                    unsigned int initX, unsigned int initY) throw(Exception) {
 
@@ -116,14 +121,14 @@ void Jeu::addShape(const Surface & surf, const shape & shapeShape,
     this->shapeArray.push_back(shp);
 }
 
-void Jeu::setEmpty(const string & image) throw(Exception) {
+void Game::setEmpty(const string & image) throw(Exception) {
     if(this->empty != NULL) {
         delete this->empty;
     }
     this->empty = new ImageSurface(this->sdl.getVideo(), image.c_str());
 }
 
-void Jeu::setBoomAnimation(const string & image, unsigned int width,
+void Game::setBoomAnimation(const string & image, unsigned int width,
                             unsigned int disappearFrame, unsigned int animSpeed) {
 
     if(this->boom != NULL) {
@@ -134,20 +139,20 @@ void Jeu::setBoomAnimation(const string & image, unsigned int width,
     this->animSpeed = animSpeed;
 }
 
-void Jeu::setBackground(const string & image) throw(Exception) {
+void Game::setBackground(const string & image) throw(Exception) {
     Video & video = this->sdl.getVideo();
     ImageSurface bg(video, image.c_str());
     video.blit(bg);
 }
 
-void Jeu::setBoomSound(const string & sound) throw(Exception) {
+void Game::setBoomSound(const string & sound) throw(Exception) {
     if(this->boomSnd != NULL) {
         delete this->boomSnd;
     }
     this->boomSnd = new Sound(this->sdl.getAudio(), sound);
 }
 
-void Jeu::setMusic(const string & music) throw(Exception) {
+void Game::setMusic(const string & music) throw(Exception) {
     if(this->music != NULL) {
         delete this->music;
     }
@@ -155,3 +160,19 @@ void Jeu::setMusic(const string & music) throw(Exception) {
     this->music->infinityPlay();
 }
 
+void Game::setDigits(const string & path, unsigned int width) throw(Exception) {
+    if(this->digits != NULL) {
+        delete this->digits;
+    }
+    this->digits = new AnimSurface(this->sdl.getVideo(), path.c_str(), width);
+}
+
+void Game::setCLinesPos(unsigned int x, unsigned int y) {
+    this->xCLines = x;
+    this->yCLines = y;
+}
+
+void Game::setCLinesDigits(unsigned int space, unsigned int count) {
+    this->digitsSpace = space;
+    this->cDigits = count;
+}

@@ -1,5 +1,5 @@
-#ifndef JEU_H_
-#define JEU_H_
+#ifndef GAME_H_
+#define GAME_H_
 
     #include "Exception.h"
     #include "SDL_Object.h"
@@ -12,7 +12,7 @@
 
     typedef void (*changeSpeedFct)(unsigned int &);
 
-    class Jeu {
+    class Game {
         private:
             SDL & sdl;
 
@@ -31,12 +31,15 @@
             const AnimSurface * boom;
             unsigned int disappearFrame;
             unsigned int animSpeed;
-            
+
             const Music * music;
 
+            const AnimSurface * digits;
+            unsigned int xCLines, yCLines, digitsSpace, cDigits;
+
         public:
-            Jeu(SDL & sdl) throw(Exception);
-            virtual ~Jeu();
+            Game(SDL & sdl) throw(Exception);
+            virtual ~Game();
 
             void setStoreCoords(unsigned int x, unsigned int y);
             void setGridCoords(unsigned int x, unsigned int y);
@@ -50,6 +53,8 @@
             void setFastSpeed(unsigned int speed);
             void setMoveSpeed(unsigned int speed);
             void setMaxFPS(unsigned int fps);
+            void setCLinesPos(unsigned int x, unsigned int y);
+            void setCLinesDigits(unsigned int space, unsigned int count);
 
             void setEmpty(const std::string & image) throw(Exception);
             void setBackground(const std::string & image) throw(Exception);
@@ -62,8 +67,9 @@
 
             void setBoomSound(const std::string & sound) throw(Exception);
             void setMusic(const std::string & music) throw(Exception);
+            void setDigits(const std::string & path, unsigned int width) throw(Exception);
 
             void play() throw(Exception);
     };
 
-#endif//JEU_H_
+#endif//GAME_H_

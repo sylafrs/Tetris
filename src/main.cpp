@@ -1,4 +1,4 @@
-#include "../include/Jeu.h"
+#include "../include/Game.h"
 #include "../include/SDL_Object.h"
 #include "../include/constantes.h"
 #include "../include/shapes.h"
@@ -28,7 +28,7 @@ int main() {
         SDL sdl(windowTitle, windowWidth, windowHeight);
         Video & video = sdl.getVideo();
 
-        Jeu tetris(sdl);
+        Game tetris(sdl);
 
         ImageSurface  rouge(video, "../imgs/rouge.bmp");
         ImageSurface   bleu(video, "../imgs/bleu.bmp");
@@ -52,8 +52,12 @@ int main() {
         tetris.setBoomSound("../snd/boom.wav");
         tetris.setMusic("../snd/tetris_2.mp3");
         tetris.setChangeSpeedFunction(speedUp);
+        tetris.setDigits("../imgs/chiffres.bmp", 30);
 
-        tetris.play();
+        Input & in = sdl.getInput();
+        while(!in.quit && !in.key[SDLK_ESCAPE]) {
+            tetris.play();
+        }
 
         return 0;
     }
