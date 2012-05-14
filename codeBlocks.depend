@@ -61,18 +61,18 @@
 	"Surface.h"
 	"Structure.h"
 
-1336998578 c:\documents and settings\admin\bureau\tetris\include\structure.h
+1337007647 c:\documents and settings\admin\bureau\tetris\include\structure.h
 	"Surface.h"
 	<vector>
 	<list>
 	"Unit.h"
 	"Shape.h"
 
-1336998578 c:\documents and settings\admin\bureau\tetris\include\unit.h
+1337006620 c:\documents and settings\admin\bureau\tetris\include\unit.h
 	"Shape.h"
 	"Structure.h"
 
-1336998579 source:c:\documents and settings\admin\bureau\tetris\src\structure.cpp
+1337007732 source:c:\documents and settings\admin\bureau\tetris\src\structure.cpp
 	"../include/Structure.h"
 	"../include/Unit.h"
 
@@ -83,7 +83,7 @@
 	<SDL/SDL.h>
 	<string>
 
-1336998579 source:c:\documents and settings\admin\bureau\tetris\src\unit.cpp
+1337009476 source:c:\documents and settings\admin\bureau\tetris\src\unit.cpp
 	"../include/Unit.h"
 	"../include/Shape.h"
 	"../include/Structure.h"
@@ -94,7 +94,7 @@
 	<string>
 	<SDL/SDL.h>
 
-1337002830 source:c:\documents and settings\admin\bureau\tetris\src\main.cpp
+1337013722 source:c:\documents and settings\admin\bureau\tetris\src\main.cpp
 	"../include/Jeu.h"
 	"../include/SDL_Object.h"
 	"../include/constantes.h"
@@ -133,7 +133,7 @@
 	<SDL/SDL_mixer.h>
 	<string>
 
-1336998579 source:c:\documents and settings\admin\bureau\tetris\src\jeu.cpp
+1337013758 source:c:\documents and settings\admin\bureau\tetris\src\jeu.cpp
 	"../include/Jeu.h"
 	"../include/Exception.h"
 	"../include/SDL_Object.h"
@@ -163,7 +163,7 @@
 	<SDL/SDL_mixer.h>
 	<string>
 
-1336998579 source:c:\documents and settings\admin\bureau\tetris\src\play.cpp
+1337011715 source:c:\documents and settings\admin\bureau\tetris\src\play.cpp
 	"../include/Jeu.h"
 	"../include/Exception.h"
 	"../include/SDL_Object.h"

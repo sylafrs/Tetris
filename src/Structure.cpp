@@ -40,7 +40,6 @@ bool Structure::allowRotR(const Unit & unit) const {
     return this->allowRotR(unit.getShape(), unit.getX(), unit.getY(), unit.getForm());
 }
 
-
 line & Structure::getLine(unsigned int n) {
     list<line>::iterator it = this->structure.begin();
     for(unsigned int i = 0; i < n; i++) it++;
@@ -158,11 +157,13 @@ bool Structure::allowRight(const Shape & shape, int x, int y, int form) const {
     return true;
 }
 
-bool Structure::allowRotL(const Shape & shape, int x, int y, int form) const {
+bool Structure::allowRotL(const Shape & shape, int x, int y, unsigned int form) const {
+
     return true;
 }
 
-bool Structure::allowRotR(const Shape & shape, int x, int y, int form) const {
+bool Structure::allowRotR(const Shape & shape, int x, int y, unsigned int form) const {
+
     return true;
 }
 

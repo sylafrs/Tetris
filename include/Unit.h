@@ -14,7 +14,7 @@
             const Shape * shape;
             const Structure & structure;
 
-            const unsigned int initX, initY; 
+            const unsigned int initX, initY;
 
         public:
             Unit(const Structure & structure, unsigned int initX, unsigned int initY, const Shape & shape);
@@ -25,6 +25,7 @@
             void fall();
             bool bottom();
             bool rotate();
+            bool rotateInv();
 
             void check();
             void checkSides();

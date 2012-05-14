@@ -9,8 +9,9 @@
 
 using namespace std;
 
-void speedUp(int & current) {
-    current = sqrt((current*current)-100);
+void speedUp(unsigned int & current) {
+    cout << "current : " << current << endl;
+    current -= current/40;
 }
 
 #ifndef __LINUX__
@@ -49,12 +50,16 @@ int main() {
         tetris.setBackground("../imgs/fond.bmp");
         tetris.setBoomAnimation("../imgs/boom.bmp", 10, 3, 100);
         tetris.setBoomSound("../snd/boom.wav");
+        tetris.setMusic("../snd/tetris_2.mp3");
+        tetris.setChangeSpeedFunction(speedUp);
 
         tetris.play();
+
+        return 0;
     }
     catch(const Exception & e) {
         cerr << e << endl;
     }
 
-    return 0;
+    return 1;
 }

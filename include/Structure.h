@@ -12,10 +12,10 @@
 
     class Structure {
 
-        private:            
+        private:
             const unsigned int wGrid, hGrid;
             std::list<line> structure;
-            
+
             line & getLine(unsigned int n);
 
         public:
@@ -26,13 +26,15 @@
 
             bool allowLeft(const Unit & unit) const;
             bool allowRight(const Unit & unit) const;
+
             bool allowRotL(const Unit & unit) const;
             bool allowRotR(const Unit & unit) const;
 
             bool allowLeft(const Shape & shape, int x, int y, int form) const;
             bool allowRight(const Shape & shape, int x, int y, int form) const;
-            bool allowRotL(const Shape & shape, int x, int y, int form) const;
-            bool allowRotR(const Shape & shape, int x, int y, int form) const;
+
+            bool allowRotL(const Shape & shape, int x, int y, unsigned int form) const;
+            bool allowRotR(const Shape & shape, int x, int y, unsigned int form) const;
 
             bool check(const Unit & unit) const ;
             void add(const Unit & unit);

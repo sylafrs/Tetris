@@ -15,7 +15,7 @@ wNext(4), hNext(2), xNext(50), yNext(130), initX(3), initY(0),
 xStore(50), yStore(357),
 fallSpeedInit(1000), fastFallSpeed(50), moveSpeed(100),
 minFrameTime(30), changeSpeed(NULL),
-empty(NULL), boomSnd(NULL), boom(NULL), disappearFrame(0), animSpeed(0), 
+empty(NULL), boomSnd(NULL), boom(NULL), disappearFrame(0), animSpeed(0),
 music(NULL) {
 
     this->empty = new RectSurface(this->sdl.getVideo(), this->squareSize, this->squareSize);
@@ -32,7 +32,7 @@ Jeu::~Jeu() {
         delete this->boom;
         this->boom = NULL;
     }
-    
+
     if(this->boomSnd != NULL) {
         delete this->boomSnd;
         this->boomSnd = NULL;
@@ -152,5 +152,6 @@ void Jeu::setMusic(const string & music) throw(Exception) {
         delete this->music;
     }
     this->music = new Music(music);
+    this->music->infinityPlay();
 }
 

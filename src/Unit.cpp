@@ -55,6 +55,15 @@ bool Unit::rotate() {
     return true;
 }
 
+bool Unit::rotateInv() {
+    this->form = this->form - 1;
+    if(this->form < 0) {
+        this->form = shape->getCForms() - 1;
+    }
+    this->checkSides();
+    return true;
+}
+
 void Unit::checkSides() {
     this->shape->checkSides(this->x, this->y, structure.getWGrid(), structure.getHGrid(), this->form);
 }

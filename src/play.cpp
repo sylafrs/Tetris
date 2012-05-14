@@ -21,7 +21,7 @@ void Jeu::play() throw(Exception) {
 
     RectSurface gameZone(video, this->squareSize*this->wGrid,
                                 this->squareSize*this->hGrid);
-                                
+
     RectSurface storeZone(video, this->squareSize*this->wNext,
                                  this->squareSize*this->hNext);
 
@@ -52,7 +52,7 @@ void Jeu::play() throw(Exception) {
     nextZone.blit(gameZoneBG, 0, 0, 0, 0, this->wNext*this->squareSize,
                                           this->hNext*this->squareSize);
     storeZone.blit(gameZoneBG, 0, 0, 0, 0, this->wNext*this->squareSize,
-                                           this->hNext*this->squareSize);                                      
+                                           this->hNext*this->squareSize);
     gameZone.blit(gameZoneBG);
 
     blit(gameZone, unit);
@@ -71,10 +71,6 @@ void Jeu::play() throw(Exception) {
 
         if(fall.check(fallSpeed)) {
             if(!unit.bottom()) {
-
-                if(this->changeSpeed != NULL)
-                    this->changeSpeed(fallSpeed);
-
                 store = false;
                 structure.add(unit);
 
@@ -110,10 +106,10 @@ void Jeu::play() throw(Exception) {
                 blit(nextZone, *next, -next->getInitX(), -next->getInitY(), 0);
                 video.blit(nextZone, xNext, yNext);
             }
-            
+
             storeZone.blit(gameZoneBG, 0, 0, 0, 0, this->wNext*this->squareSize,
                                                    this->hNext*this->squareSize);
-                                                      
+
             blit(storeZone, *stored, -stored->getInitX(), -stored->getInitY(), 0);
             video.blit(storeZone, xStore, yStore);
 
@@ -147,9 +143,6 @@ void Jeu::play() throw(Exception) {
             in.key[SDLK_SPACE] = false;
             unit.fall();
 
-            if(this->changeSpeed != NULL)
-                this->changeSpeed(fallSpeed);
-
             store = false;
             structure.add(unit);
 
@@ -176,34 +169,39 @@ void Jeu::play() throw(Exception) {
         sdl.update();
 
         if(structure.checkLines() && this->boom != NULL) {
-            delay.reset();
-            if(this->boomSnd != NULL) {
-                this->boomSnd->play();
-            }
+            if(this->changeSpeed != NULL)
+                this->changeSpeed(fallSpeed);
 
-            RectSurface square(video, this->squareSize, this->squareSize);
-            for(unsigned int step = 0; step < this->boom->getCFrames(); step++) {
-
-                square.fill(255,255,255);
-                blit(square, *this->boom, step);
-                square.setKey(255, 255, 255);
-                for(unsigned int i = 0; i < structure.getLineCount(); i++) {
-                    if(structure.checkLine(i)) {
-                        if(step < this->disappearFrame) {
-                            blitLine(i, gameZone, structure);
-                        }
-                        else {
-                            blitLineOf(i, gameZone, *empty, structure);
-                        }
-                        blitLineOf(i, gameZone, square, structure);
-                    }
+            if(this->boom != NULL) {
+                delay.reset();
+                if(this->boomSnd != NULL) {
+                    this->boomSnd->play();
                 }
 
-                video.blit(gameZone, this->xGrid, this->yGrid);
-                delay.wait(this->animSpeed);
-                sdl.update();
+                RectSurface square(video, this->squareSize, this->squareSize);
+                for(unsigned int step = 0; step < this->boom->getCFrames(); step++) {
+
+                    square.fill(255,255,255);
+                    blit(square, *this->boom, step);
+                    square.setKey(255, 255, 255);
+                    for(unsigned int i = 0; i < structure.getLineCount(); i++) {
+                        if(structure.checkLine(i)) {
+                            if(step < this->disappearFrame) {
+                                blitLine(i, gameZone, structure);
+                            }
+                            else {
+                                blitLineOf(i, gameZone, *empty, structure);
+                            }
+                            blitLineOf(i, gameZone, square, structure);
+                        }
+                    }
+
+                    video.blit(gameZone, this->xGrid, this->yGrid);
+                    delay.wait(this->animSpeed);
+                    sdl.update();
+                }
+                structure.eraseFullLines();
             }
-            structure.eraseFullLines();
         }
     }
 
