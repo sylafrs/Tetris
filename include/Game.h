@@ -69,7 +69,7 @@
             void setMusic(const std::string & music) throw(Exception);
             void setDigits(const std::string & path, unsigned int width) throw(Exception);
 
-            void menu() throw(Exception);
+            int menu() throw(Exception);
             void play() throw(Exception);
     };
 

@@ -1,8 +1,10 @@
 #include "../include/Game.h"
 
-void Game::menu() throw(Exception) {
+#warning (function to create)
+int Game::menu() throw(Exception) {
 
 
 
+    return 0;
 }
 

@@ -10,10 +10,10 @@
         public:
             Audio() throw(Exception);
             virtual ~Audio();
-            
+
             unsigned int createChannel() throw(Exception);
             void haltSounds();
-    
+
     };
 
 #endif//AUDIO_H_

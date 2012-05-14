@@ -1,7 +1,7 @@
 # depslib dependency file v1.0
-1336998579 source:c:\documents and settings\admin\bureau\tetris\src\chrono.cpp
+1337030367 source:c:\documents and settings\admin\bureau\tetris\src\chrono.cpp
 	"../include/Chrono.h"
-	<SDL/SDL.h>
+	"../include/SDL/SDL.h"
 
 1337030394 c:\documents and settings\admin\bureau\tetris\include\chrono.h
 	"SDL/SDL.h"
@@ -13,19 +13,19 @@
 1336998578 c:\documents and settings\admin\bureau\tetris\include\exception.h
 	<string>
 
-1336998579 source:c:\documents and settings\admin\bureau\tetris\src\input.cpp
+1337030367 source:c:\documents and settings\admin\bureau\tetris\src\input.cpp
 	"../include/Input.h"
-	<SDL/SDL.h>
+	"../include/SDL/SDL.h"
 
 1337030394 c:\documents and settings\admin\bureau\tetris\include\input.h
 	"SDL/SDL.h"
 
-1336998579 source:c:\documents and settings\admin\bureau\tetris\src\sdl_object.cpp
+1337030367 source:c:\documents and settings\admin\bureau\tetris\src\sdl_object.cpp
 	"../include/SDL_Object.h"
 	"../include/Video.h"
 	"../include/Input.h"
 	"../include/Exception.h"
-	<SDL/SDL.h>
+	"../include/SDL/SDL.h"
 	<string>
 
 1336998578 c:\documents and settings\admin\bureau\tetris\include\sdl_object.h
@@ -46,7 +46,7 @@
 	"SDL/SDL.h"
 	"Exception.h"
 
-1336998578 c:\documents and settings\admin\bureau\tetris\include\audio.h
+1337030675 c:\documents and settings\admin\bureau\tetris\include\audio.h
 	"Exception.h"
 
 1336998579 source:c:\documents and settings\admin\bureau\tetris\src\shape.cpp
@@ -76,11 +76,11 @@
 	"../include/Structure.h"
 	"../include/Unit.h"
 
-1336999827 source:c:\documents and settings\admin\bureau\tetris\src\surface.cpp
+1337030367 source:c:\documents and settings\admin\bureau\tetris\src\surface.cpp
 	"../include/Surface.h"
 	"../include/Video.h"
 	"../include/Exception.h"
-	<SDL/SDL.h>
+	"../include/SDL/SDL.h"
 	<string>
 
 1337025940 source:c:\documents and settings\admin\bureau\tetris\src\unit.cpp
@@ -88,11 +88,11 @@
 	"../include/Shape.h"
 	"../include/Structure.h"
 
-1336998579 source:c:\documents and settings\admin\bureau\tetris\src\video.cpp
+1337030336 source:c:\documents and settings\admin\bureau\tetris\src\video.cpp
 	"../include/Video.h"
 	"../include/Exception.h"
 	<string>
-	<SDL/SDL.h>
+	"SDL/SDL.h"
 
 1337029701 source:c:\documents and settings\admin\bureau\tetris\src\main.cpp
 	"../include/Game.h"
@@ -185,7 +185,7 @@
 	"../include/Music.h"
 	<vector>
 
-1337030006 c:\documents and settings\admin\bureau\tetris\include\game.h
+1337030529 c:\documents and settings\admin\bureau\tetris\include\game.h
 	"Exception.h"
 	"SDL_Object.h"
 	"Surface.h"
